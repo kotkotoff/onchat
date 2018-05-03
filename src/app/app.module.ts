@@ -32,6 +32,7 @@ import { AuthGuard } from './guards/auth-guard.service';
       { path: '', component: LoginComponent },
       { path: 'login', component: LoginComponent },
       { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+      { path: '**', redirectTo: 'chat' }
     ])
   ],
   providers: [AuthService, UserService, AuthGuard],
