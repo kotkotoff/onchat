@@ -1,6 +1,9 @@
 .card {
   background-color: lightgray;
-  border-radius: 5px;
-  box-shadow: 5px 5px black;
+  box-shadow: 2px 2px black;
 }
 
+.clear-sides {
+  padding: 0px;
+  margin-right: 0px;
+}
