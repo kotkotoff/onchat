@@ -1,4 +1,7 @@
+import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +11,13 @@ import { Component } from '@angular/core';
 
 export class AppComponent {
   title = 'Onchat';
+
+  constructor(authService: AuthService, router: Router, userService: UserService) {
+
+    authService.user$.subscribe(user => {
+      if (!user) { return; }
+      userService.save(user);
+      router.navigate(["/chat"]);
+    });
+  }
 }

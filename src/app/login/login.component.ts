@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   animations: [
     trigger('fade', [
       transition('void <=> *', [
         style([{backgroundColor: 'darkgray', opacity: '0' }]),
-        animate(2000, style([{backgroundColor: 'white', opacity: '1' }])
+        animate('2s ease-out', style([{backgroundColor: 'white', opacity: '1' }]))
       ])
     ])
   ],
@@ -16,5 +17,9 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 })
 export class LoginComponent {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
+
+  login() {
+    this.authService.login();
+  }
 }

@@ -1,4 +1,12 @@
 .card {
   padding: 40px;
   box-shadow: 5px 5px 5px black;
+  border-radius: 20px;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

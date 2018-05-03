@@ -4,10 +4,3 @@ html, body {
   height: 100%;
   background-color: darkgray;
 }
-
-.container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
