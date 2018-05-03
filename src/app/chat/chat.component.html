@@ -1,28 +1,29 @@
 <top-navbar></top-navbar>
 <div @slideRight class="row h-100 clear-sides">
-  <div class="col-4">
-    <div class="card h-100">
-      <div class="card-body">
-        <div class="container h-100">
-          <div class="row h-50">
-            <div class="col input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Say</span>
-              </div>
-              <textarea class="form-control"></textarea>
+  <div class="col-5 card">
+    <div class="chat">
+      <div class="d-flex flex-column h-100 flex-column-reverse" *ngIf="(messages | async) as msg">
+        <div @appear *ngFor="let m of msg; trackBy:track">
+
+          <div class="p-2 alert alert-warning">
+            <div class="row">
+              <span class="small-font text-left col">{{ m.name}}</span>
+              <span class="small-font text-right col">{{ m.getDate() | timeAgo }} </span>
             </div>
-          </div>
-          <div class="row align-items-end">
-            <div class="col input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Say</span>
-              </div>
-              <textarea class="form-control"></textarea>
-            </div>
+            <div>{{ m.text }}</div>
+
           </div>
         </div>
       </div>
     </div>
+
+    <div class="card-body input-group">
+      <textarea [(ngModel)]="text" name="text" (keydown.enter)="send()" (keydown.control.enter)="newLine()" class="form-control"></textarea>
+      <div class="input-group-append">
+        <button (click)="send()" class="btn btn-outline-success btn-block">Send</button>
+      </div>
+    </div>
   </div>
-  <div class="col-7"></div>
+
+  <div class="col-6"></div>
 </div>

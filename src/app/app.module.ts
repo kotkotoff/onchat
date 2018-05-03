@@ -1,3 +1,4 @@
+import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,13 +15,16 @@ import { LoginComponent } from './login/login.component';
 import { ChatComponent } from './chat/chat.component';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 import { AuthGuard } from './guards/auth-guard.service';
+import { FormsModule } from '@angular/forms';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ChatComponent,
-    TopNavbarComponent
+    TopNavbarComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -28,6 +32,7 @@ import { AuthGuard } from './guards/auth-guard.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: '', component: LoginComponent },
       { path: 'login', component: LoginComponent },
@@ -35,7 +40,7 @@ import { AuthGuard } from './guards/auth-guard.service';
       { path: '**', redirectTo: 'chat' }
     ])
   ],
-  providers: [AuthService, UserService, AuthGuard],
+  providers: [AuthService, UserService, AuthGuard, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

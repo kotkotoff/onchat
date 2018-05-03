@@ -19,6 +19,7 @@ export class UserService {
     this.db.object('/chat-users/' + user.uid)
       .update(chatUser)
       .then(() => this.cacheUser(chatUser));
+
   }
 
   cacheUser(user: ChatUser): void {

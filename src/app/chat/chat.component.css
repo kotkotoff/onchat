@@ -7,3 +7,16 @@
   padding: 0px;
   margin-right: 0px;
 }
+
+.chat {
+  height: 80%;
+}
+
+textarea {
+  resize: none;
+}
+
+.small-font {
+  color: chocolate;
+  font-size: 8pt;
+}
