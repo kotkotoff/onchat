@@ -1,0 +1,93 @@
+[debug] [2018-05-03T06:56:07.322Z] ----------------------------------------------------------------------
+[debug] [2018-05-03T06:56:07.324Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase login
+[debug] [2018-05-03T06:56:07.324Z] CLI Version:   3.18.4
+[debug] [2018-05-03T06:56:07.324Z] Platform:      win32
+[debug] [2018-05-03T06:56:07.324Z] Node Version:  v9.11.1
+[debug] [2018-05-03T06:56:07.325Z] Time:          Thu May 03 2018 09:56:07 GMT+0300 (FLE Daylight Time)
+[debug] [2018-05-03T06:56:07.325Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+[info] Visit this URL on any device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=860514713&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2018-05-03T06:56:17.138Z] >>> HTTP REQUEST POST https://accounts.google.com/o/oauth2/token  
+ { code: '4/AACXNDTFKRPhIpFaS2eXIP65vSdkN14jLC3Ph-FatlB7gjQ6rPcGPNgYliBhwa6jUkZz6qWIKCodKG8PmbyOeEs',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  redirect_uri: 'http://localhost:9005',
+  grant_type: 'authorization_code' } 
+ Thu May 03 2018 09:56:17 GMT+0300 (FLE Daylight Time)
+[debug] [2018-05-03T06:56:17.458Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-03T06:56:17.500Z] Error: EPERM: operation not permitted, rename 'C:\Users\dspir\.config\configstore\firebase-tools.json.2599741499' -> 'C:\Users\dspir\.config\configstore\firebase-tools.json'
+    at Object.fs.renameSync (fs.js:781:18)
+    at Function.writeFileSync [as sync] (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\node_modules\write-file-atomic\index.js:124:8)
+    at Configstore.set (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\index.js:62:21)
+    at Configstore.set (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\index.js:93:11)
+    at C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\commands\login.js:50:21
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:182:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2018-05-03T06:57:20.970Z] ----------------------------------------------------------------------
+[debug] [2018-05-03T06:57:20.972Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase login
+[debug] [2018-05-03T06:57:20.972Z] CLI Version:   3.18.4
+[debug] [2018-05-03T06:57:20.973Z] Platform:      win32
+[debug] [2018-05-03T06:57:20.973Z] Node Version:  v9.11.1
+[debug] [2018-05-03T06:57:20.974Z] Time:          Thu May 03 2018 09:57:20 GMT+0300 (FLE Daylight Time)
+[debug] [2018-05-03T06:57:20.974Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+[info] Visit this URL on any device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=69409565&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2018-05-03T06:57:26.987Z] >>> HTTP REQUEST POST https://accounts.google.com/o/oauth2/token  
+ { code: '4/AADe5oMg2cEoMlSY8WC-s7uNXduMl89mCgwxOPLLr-UHoZphBN7VJpF4SgmVBo99dkTOEwxSkY5uQs-KoIpqxXM',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  redirect_uri: 'http://localhost:9005',
+  grant_type: 'authorization_code' } 
+ Thu May 03 2018 09:57:26 GMT+0300 (FLE Daylight Time)
+[debug] [2018-05-03T06:57:27.334Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-03T06:57:27.379Z] Error: EPERM: operation not permitted, rename 'C:\Users\dspir\.config\configstore\firebase-tools.json.4549599' -> 'C:\Users\dspir\.config\configstore\firebase-tools.json'
+    at Object.fs.renameSync (fs.js:781:18)
+    at Function.writeFileSync [as sync] (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\node_modules\write-file-atomic\index.js:124:8)
+    at Configstore.set (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\index.js:62:21)
+    at Configstore.set (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\index.js:93:11)
+    at C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\commands\login.js:50:21
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:182:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2018-05-03T06:57:37.203Z] ----------------------------------------------------------------------
+[debug] [2018-05-03T06:57:37.205Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase login
+[debug] [2018-05-03T06:57:37.206Z] CLI Version:   3.18.4
+[debug] [2018-05-03T06:57:37.206Z] Platform:      win32
+[debug] [2018-05-03T06:57:37.206Z] Node Version:  v9.11.1
+[debug] [2018-05-03T06:57:37.207Z] Time:          Thu May 03 2018 09:57:37 GMT+0300 (FLE Daylight Time)
+[debug] [2018-05-03T06:57:37.207Z] ----------------------------------------------------------------------
+[debug] 
+[info] 
+[info] Visit this URL on any device to log in:
+[info] https://accounts.google.com/o/oauth2/auth?client_id=563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com&scope=email%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloudplatformprojects.readonly%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Ffirebase%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform&response_type=code&state=379590159&redirect_uri=http%3A%2F%2Flocalhost%3A9005
+[info] 
+[info] Waiting for authentication...
+[debug] [2018-05-03T06:57:43.177Z] >>> HTTP REQUEST POST https://accounts.google.com/o/oauth2/token  
+ { code: '4/AAAr_89IOoMJMQkoYESB-Yo0TJgcXorFud5tYeHDcZpwSV4r-9TrtcuHdkpKfk2iN1qnyXbVhLMr4O6mgdCdGLE',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  redirect_uri: 'http://localhost:9005',
+  grant_type: 'authorization_code' } 
+ Thu May 03 2018 09:57:43 GMT+0300 (FLE Daylight Time)
+[debug] [2018-05-03T06:57:43.460Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-03T06:57:43.548Z] Error: EPERM: operation not permitted, rename 'C:\Users\dspir\.config\configstore\firebase-tools.json.2321314484' -> 'C:\Users\dspir\.config\configstore\firebase-tools.json'
+    at Object.fs.renameSync (fs.js:781:18)
+    at Function.writeFileSync [as sync] (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\node_modules\write-file-atomic\index.js:124:8)
+    at Configstore.set (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\index.js:62:21)
+    at Configstore.set (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\index.js:93:11)
+    at C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\commands\login.js:52:21
+    at <anonymous>
+    at process._tickCallback (internal/process/next_tick.js:182:7)
+[error] 
+[error] Error: An unexpected error has occurred.

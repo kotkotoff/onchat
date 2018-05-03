@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+html, body {
+  height: 100%;
+  background-color: darkgray;
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
