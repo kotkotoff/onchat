@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, style, state, animate, transition } from '@angular/animations';
+import { trigger, style, state, animate, stagger, query, transition } from '@angular/animations';
 import { Message } from '../model/message';
 import { UserService } from '../services/user.service';
 import { ChatUser } from '../model/chat-user';
@@ -14,16 +14,10 @@ import { Subject } from 'rxjs/Subject';
 
 @Component({
   animations: [
-    trigger('slideRight', [
-      transition('void <=> *', [
-        style([{ transform: 'translateX(-100%)' }]),
-        animate('1s ease-in', style({ transform: 'translateX(0)' }))
-      ])
-    ]),
     trigger('appear', [
       transition('void => *', [
-        style([{ opacity: 0.1, transform: 'scale(0)' }]),
-        animate('0.3s ease-out', style({ opacity: 1, transform: 'scale(1)' }))
+        style([{ opacity: 0.1, transform: 'scale(0) rotate(20deg)' }]),
+        animate('0.6s ease-in', style({ opacity: 1, transform: 'scale(1) rotate(0deg)' }))
       ])
     ]),
   ],
@@ -35,16 +29,14 @@ export class ChatComponent implements OnInit {
 
   text: string;
   messages: Observable<Message[]> = Observable.empty();
-  imageMessages: Observable<Message[]> = Observable.empty();
-  selectedMessage: Observable<Message> = Observable.empty();
   user: ChatUser;
-  clickImageEmitter: Subject<Message> = new Subject<Message>();
-
+  currentSrc: string = "";
+  opened: boolean;
+  imgSrc: string;
+  loading: boolean;
 
   ngOnInit(): void {
-    this.messages = this.messageService.list(15);
-    this.selectedMessage = this.messages.map(m => m.reverse()).mergeMap(m => m).filter(m => {
-        return m.imageUrl ? true : false; }).merge(this.clickImageEmitter.asObservable());
+    this.messages = this.messageService.list(18);
   }
 
   constructor(userService: UserService, private messageService: MessageService, private imageService: ImageService) {
@@ -55,17 +47,18 @@ export class ChatComponent implements OnInit {
       this.text += '\n';
   }
 
-  send() {
+  post() {
     if (this.text) {
       this.text = this.text.trim();
-      if (this.text.length === 0) { return; }
       if (this.text.length > 500) { this.text = this.text.substring(0, 500); }
-
       const tuple = this.imageService.filter(this.text);
-      this.messageService.save(Message.create(tuple[0], this.user.id,
-        this.user.displayName , tuple[1]));
+      if (tuple.imageUrl) {
+        this.messageService.save(Message.create(tuple.text, this.user.id,
+          this.user.displayName, tuple.imageUrl));
+      }
     }
     this.text = "";
+    this.currentSrc = "";
   }
 
   track(index, item) {
@@ -73,6 +66,23 @@ export class ChatComponent implements OnInit {
   }
 
   onClick(m: Message) {
-    this.clickImageEmitter.next(m);
+
+  }
+
+  onTextChanged() {
+    const tuple = this.imageService.filter(this.text);
+    this.currentSrc = tuple.imageUrl;
+  }
+
+  openGallery(m: Message) {
+     this.loading = true;
+     this.opened = true;
+     this.imgSrc = m.imageUrl;
+     this.loading = false;
+  }
+
+  closeGallery() {
+    this.opened = false;
+    this.loading = false;
   }
 }

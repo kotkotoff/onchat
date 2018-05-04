@@ -1,8 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,700);
+
 html, body {
   height: 100%;
   background-color: darkgray;
   padding: 0px;
   margin: 0px;
+  font-family: 'Oswald', sans-serif !important;
+  font-size: 8pt !important;
 }

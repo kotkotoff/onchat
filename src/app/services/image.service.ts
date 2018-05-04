@@ -6,7 +6,7 @@ export class ImageService {
   urlRegex = /(https?:\/\/[^ ]*)/;
   constructor() { }
 
-  filter(text: string) {
+  filter(text: string): {text: string, imageUrl: string} {
     const match = text.match(this.urlRegex);
     let newText = text;
     let url = null;
@@ -16,6 +16,6 @@ export class ImageService {
         newText = text.replace(this.urlRegex, " [image] ");
       }
     }
-    return [newText, url];
+    return { text: newText, imageUrl: url };
   }
 }

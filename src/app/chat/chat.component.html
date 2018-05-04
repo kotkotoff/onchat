@@ -1,32 +1,33 @@
-<top-navbar></top-navbar>
-
-<div @slideRight class="row h-100 clear-sides top-margin">
-  <div class="col-5 card">
-    <div class="chat">
-      <div class="d-flex flex-column h-100 flex-column-reverse" *ngIf="(messages | async) as msg">
-        <div *ngFor="let m of msg; trackBy:track" [ngClass]="[m.belongsTo(user.id) ? 'from-right'     : 'from-left']">
-
-          <div @appear class="p-2 alert" [ngClass]="[m.belongsTo(user.id) ? 'alert-warning' : 'alert-primary']">
-            <div class="row">
-              <span class="small-font text-left col">{{ m.name}}</span>
-              <span class="small-font text-right col">{{ m.getDate() | timeAgo }} </span>
-            </div>
-            <div (click)="m.imageUrl ? onClick(m) : null">{{ m.text }}</div>
-
-          </div>
+<div class="row">
+  <div class="col-12">
+    <top-navbar> </top-navbar>
+  </div>
+</div>
+<div class="row h-100">
+  <div class="d-flex flex-wrap">
+  <div class="card p-2">
+      <img class="card-img-top" *ngIf="currentSrc" [src]="currentSrc">
+      <div class="card-body input-group">
+          <textarea placeholder="Message with a link..." class="form-control" [(ngModel)]="text" (keyup.enter)="post()" (keydown.control.enter)="newLine()" (input)="onTextChanged()"></textarea>
+          <div class="input-group-append">
+            <a class="btn btn-outline-success" (click)="post()">Post</a>
         </div>
       </div>
     </div>
-
-    <div class="card-body input-group">
-      <textarea [(ngModel)]="text" name="text" maxlength="500" (keyup.enter)="send()" (keydown.control.enter)="newLine()" class="form-control"></textarea>
-      <div class="input-group-append">
-        <button (click)="send()" class="btn btn-outline-success btn-block">Send</button>
+    <div class="card p-2" *ngFor="let m of (messages | async); trackBy:track" @appear>
+      <img class="card-img-top" [src]="m.imageUrl" (click)="openGallery(m)">
+      <div class="card-body">
+        <h5 class="card-title">{{ m.name }}</h5>
+        <p class="card-text">{{ m.text }}</p>
+        <p><small>{{ m.getDate() | timeAgo }}</small></p>
       </div>
     </div>
   </div>
-
-  <div class="col-7">
-    <message-card *ngIf="(selectedMessage | async) as msg" [message]="msg"></message-card>
-  </div>
 </div>
+
+<div class="ng-overlay" *ngIf="opened" (click)="closeGallery()">
+  <div class="ng-gallery-content" >
+  <div class="uil-ring-css" *ngIf="loading"><div></div></div>
+  <img *ngIf="!loading" src="{{imgSrc}}" class="effect" />
+    <span class="info-text"></span>
+  </div>
