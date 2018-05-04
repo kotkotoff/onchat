@@ -1,4 +1,3 @@
-import { ImageMessage } from './../model/image-message';
 import { Message } from './../model/message';
 import { Injectable } from '@angular/core';
 
@@ -7,11 +6,16 @@ export class ImageService {
   urlRegex = /(https?:\/\/[^ ]*)/;
   constructor() { }
 
-  filter( m : Message) : ImageMessage|null {
-    var url = m.text.match(this.urlRegex)[1];
-    if (url) {
-      return new ImageMessage(url, m);
+  filter(text: string) {
+    const match = text.match(this.urlRegex);
+    let newText = text;
+    let url = null;
+    if (match) {
+      url = match[1];
+      if (url) {
+        newText = text.replace(this.urlRegex, " [image] ");
+      }
     }
-    return null;
+    return [newText, url];
   }
 }

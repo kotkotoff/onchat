@@ -7,11 +7,11 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class MessageService {
-  
+
   constructor(private db: AngularFireDatabase) { }
 
-  list(topN : number) : Observable<Message[]> {
-    return this.db.list('/messages', ref => { return ref.orderByChild("date").limitToLast(topN) }).
+  list(topN: number): Observable<Message[]> {
+    return this.db.list('/messages', ref => ref.orderByChild("date").limitToLast(topN)).
       snapshotChanges().map((m  => m.map(x => new Message(x.key, x.payload.val())).reverse()));
   }
 

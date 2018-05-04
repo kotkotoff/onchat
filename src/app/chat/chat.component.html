@@ -1,16 +1,17 @@
 <top-navbar></top-navbar>
-<div @slideRight class="row h-100 clear-sides">
+
+<div @slideRight class="row h-100 clear-sides top-margin">
   <div class="col-5 card">
     <div class="chat">
       <div class="d-flex flex-column h-100 flex-column-reverse" *ngIf="(messages | async) as msg">
-        <div *ngFor="let m of msg; trackBy:track" [ngClass]="[m.belongsTo(user.id) ? 'from-right' : 'from-left']">
+        <div *ngFor="let m of msg; trackBy:track" [ngClass]="[m.belongsTo(user.id) ? 'from-right'     : 'from-left']">
 
           <div @appear class="p-2 alert" [ngClass]="[m.belongsTo(user.id) ? 'alert-warning' : 'alert-primary']">
             <div class="row">
               <span class="small-font text-left col">{{ m.name}}</span>
               <span class="small-font text-right col">{{ m.getDate() | timeAgo }} </span>
             </div>
-            <div>{{ m.text }}</div>
+            <div (click)="m.imageUrl ? onClick(m) : null">{{ m.text }}</div>
 
           </div>
         </div>
@@ -25,7 +26,7 @@
     </div>
   </div>
 
-  <div class="col-6 d-flex flex-column flex-column-reverse">
-    <message-card *ngIf="(imageMessages | async) as msg" [message]="msg[0]"></message-card>
+  <div class="col-7">
+    <message-card *ngIf="(selectedMessage | async) as msg" [message]="msg"></message-card>
   </div>
 </div>
