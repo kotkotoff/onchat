@@ -52,6 +52,9 @@
 
 .ng-gallery-content > img.effect {
   animation: fadeIn 0.5s;
+  width: auto;
+  height: 80%;
+  object-fit: contain;
 }
 
 @keyframes fadeIn {

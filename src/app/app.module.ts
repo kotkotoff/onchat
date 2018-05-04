@@ -20,6 +20,7 @@ import { FormsModule } from '@angular/forms';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { MessageCardComponent } from './message-card/message-card.component';
 import { OpenImageComponent } from './open-image/open-image.component';
+import { PostCardComponent } from './post-card/post-card.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { OpenImageComponent } from './open-image/open-image.component';
     TopNavbarComponent,
     TimeAgoPipe,
     MessageCardComponent,
-    OpenImageComponent
+    OpenImageComponent,
+    PostCardComponent
   ],
   imports: [
     BrowserModule,

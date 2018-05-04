@@ -11,6 +11,7 @@ import 'rxjs/add/operator/merge';
 import { MessageService } from '../services/message.service';
 import { ImageService } from '../services/image.service';
 import { Subject } from 'rxjs/Subject';
+import { Post } from '../model/post';
 
 
 @Component({
@@ -19,7 +20,11 @@ import { Subject } from 'rxjs/Subject';
       transition('void => *', [
         style([{ opacity: 0.1, transform: 'scale(0) rotate(20deg)' }]),
         animate('0.6s ease-in', style({ opacity: 1, transform: 'scale(1) rotate(0deg)' }))
-      ])
+      ]),
+      transition('* => void', [
+        style([{ opacity: 1, transform: 'scale(1)' }]),
+        animate('0.6s ease-in', style({ opacity: 0, transform: 'scale(0)' }))
+      ]),
     ]),
   ],
   selector: 'chat',
@@ -27,11 +32,9 @@ import { Subject } from 'rxjs/Subject';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-
-  text: string;
   messages: Observable<Message[]> = Observable.empty();
   user: ChatUser;
-  currentSrc = "";
+  
   openMessage$ = new Subject<Message>();
 
   ngOnInit(): void {
@@ -42,31 +45,14 @@ export class ChatComponent implements OnInit {
     userService.getChatUser().take(1).subscribe(user => this.user = user);
   }
 
-  newLine() {
-      this.text += '\n';
-  }
 
-  post() {
-    if (this.text) {
-      this.text = this.text.trim();
-      if (this.text.length > 500) { this.text = this.text.substring(0, 500); }
-      const tuple = this.imageService.filter(this.text);
-      if (tuple.imageUrl) {
-        this.messageService.save(Message.create(tuple.text, this.user.id,
-          this.user.displayName, tuple.imageUrl));
-      }
-    }
-    this.text = "";
-    this.currentSrc = "";
+  post(post: Post) {
+    this.messageService.save(Message.create(post.text, this.user.id,
+      this.user.displayName, post.imageUrl));
   }
 
   track(index, item) {
     return item.id;
-  }
-
-  onTextChanged() {
-    const tuple = this.imageService.filter(this.text);
-    this.currentSrc = tuple.imageUrl;
   }
 
   onImageClick(m: Message) {

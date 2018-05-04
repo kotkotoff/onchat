@@ -18,4 +18,8 @@ export class MessageService {
   save(m: Message) {
     this.db.list('/messages/').push(m);
   }
+
+  delete(m: Message) {
+    this.db.object('/messages/' + m.id).remove();
+  }
 }

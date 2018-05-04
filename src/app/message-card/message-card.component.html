@@ -1,9 +1,5 @@
-
-<div class="card">
-  <img class="card-img-top" [src]="message.imageUrl">
-  <div class="card-body">
-    <h5 class="card-title">{{message.name}}</h5>
-    <p class="card-text">{{message.text}}</p>
-    {{ message.date | timeAgo }}
-  </div>
+<img class="card-img-top" *ngIf="imageSrc" [src]="imageSrc">
+<div class="card-body input-group">
+  <textarea placeholder="Message with a link..." class="form-control" [(ngModel)]="text" (keyup.enter)="post()" (keydown.control.enter)="newLine()"
+    (input)="onTextChanged()"></textarea>
 </div>

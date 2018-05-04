@@ -14,12 +14,21 @@ export class UserService {
     const chatUser = new ChatUser(user.uid,
       {
         email: user.email,
-        displayName: user.displayName
+        displayName: user.displayName,
+        isAdmin: false
       });
     this.db.object('/chat-users/' + user.uid)
       .update(chatUser)
       .then(() => this.cacheUser(chatUser));
 
+  }
+
+  update(user: firebase.User, dbUser: ChatUser) {
+    dbUser.email = user.email;
+    dbUser.displayName = user.displayName;
+    this.db.object('/chat-users/' + user.uid)
+    .update(dbUser)
+    .then(() => this.cacheUser(dbUser));
   }
 
   cacheUser(user: ChatUser): void {
@@ -37,7 +46,7 @@ export class UserService {
       .switchMap(u => this.getUser(u.uid));
   }
 
-  private getUser(userId: string): Observable<ChatUser> {
+  getUser(userId: string): Observable<ChatUser> {
     return this.db.object('/chat-users/' + userId)
       .snapshotChanges()
       .map(s => new ChatUser(s.key, s.payload.val()));
@@ -46,10 +55,10 @@ export class UserService {
   private getUserFromCache(): ChatUser|null {
     try {
       const userJson = localStorage.getItem("user");
-      if (!userJson) { return null; }
-      return JSON.parse(userJson);
-    } catch {
-      return null;
-    }
+      if (userJson) {
+        return JSON.parse(userJson);
+      }
+    } catch {}
+    return null;
   }
 }

@@ -16,7 +16,15 @@ export class AppComponent {
 
     authService.user$.subscribe(user => {
       if (!user) { return; }
-      userService.save(user);
+      userService.getUser(user.uid).take(1).subscribe(chatUser => {
+        if (chatUser) {
+          userService.update(user, chatUser);
+        }
+        else {
+          userService.save(user);
+        }
+      });
+      
       router.navigate(["/chat"]);
     });
   }

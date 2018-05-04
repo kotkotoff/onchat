@@ -1,0 +1,15 @@
+<div class="allbody">
+  <div class="card-header">
+    {{ message.name }}
+  </div>
+  <img class="card-img-top" [src]="message.imageUrl" (click)="onImageClick(message)">
+  <div class="card-body">
+    <p class="card-text">{{ message.text }}</p>
+
+  </div>
+  <div class="card-footer text-muted">
+    <p class="alignleft"><small>{{ message.getDate() | timeAgo }}</small></p>
+    <p class="alignright"><a class="card-link" href="#" *ngIf="user.isAdmin" (click)="delete()"><small>delete</small></a></p>
+    <div style="clear: both;"></div>
+  </div>
+</div>

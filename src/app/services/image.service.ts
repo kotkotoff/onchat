@@ -1,21 +1,22 @@
 import { Message } from './../model/message';
 import { Injectable } from '@angular/core';
+import { Post } from '../model/post';
 
 @Injectable()
 export class ImageService {
   urlRegex = /(https?:\/\/[^ ]*)/;
   constructor() { }
 
-  filter(text: string): {text: string, imageUrl: string} {
+  filter(text: string): Post {
     const match = text.match(this.urlRegex);
     let newText = text;
     let url = null;
     if (match) {
       url = match[1];
       if (url) {
-        newText = text.replace(this.urlRegex, " [image] ");
+        newText = text.replace(this.urlRegex, "");
       }
     }
-    return { text: newText, imageUrl: url };
+    return new Post(newText, url);
   }
 }
