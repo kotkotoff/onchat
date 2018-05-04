@@ -1,3 +1,4 @@
+import { ImageService } from './services/image.service';
 import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
@@ -17,6 +18,7 @@ import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { FormsModule } from '@angular/forms';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import { MessageCardComponent } from './message-card/message-card.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import {TimeAgoPipe} from 'time-ago-pipe';
     LoginComponent,
     ChatComponent,
     TopNavbarComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    MessageCardComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,7 @@ import {TimeAgoPipe} from 'time-ago-pipe';
       { path: '**', redirectTo: 'chat' }
     ])
   ],
-  providers: [AuthService, UserService, AuthGuard, MessageService],
+  providers: [AuthService, UserService, AuthGuard, MessageService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -25,5 +25,7 @@
     </div>
   </div>
 
-  <div class="col-6"></div>
+  <div class="col-6 d-flex flex-column flex-column-reverse">
+    <message-card *ngIf="(imageMessages | async) as msg" [message]="msg[0]"></message-card>
+  </div>
 </div>

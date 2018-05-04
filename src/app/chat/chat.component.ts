@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/observable/empty';
 import { MessageService } from '../services/message.service';
+import { ImageService } from '../services/image.service';
+import { ImageMessage } from '../model/image-message';
 
 @Component({
   animations: [
@@ -27,18 +29,26 @@ import { MessageService } from '../services/message.service';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit{
+export class ChatComponent implements OnInit {
 
   text: string;
   messages: Observable<Message[]> = Observable.empty();
+  imageMessages: Observable<Message[]> = Observable.empty();
   user: ChatUser;
 
-  
+
   ngOnInit(): void {
     this.messages = this.messageService.list(15);
+    this.imageMessages = this.messages.map(messages => {
+      return messages.reduce((r, m) => {
+        let im = this.imageService.filter( m);
+        if (im) r.push(im);
+        return r;
+      }, []);
+    });
   }
 
-  constructor(userService: UserService, private messageService: MessageService) { 
+  constructor(userService: UserService, private messageService: MessageService, private imageService: ImageService) {
     userService.getChatUser().take(1).subscribe(user => this.user = user);
   }
 
