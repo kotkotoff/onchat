@@ -48,8 +48,12 @@ export class ChatComponent implements OnInit{
   }
 
   send() {
-    //this.messages.unshift();
-    this.messageService.save(Message.create(this.text, this.user.id, this.user.displayName))
+    if (this.text) {
+      this.text = this.text.trim();
+      if (this.text.length == 0) return;
+      if (this.text.length > 500) this.text = this.text.substring(0, 500);
+      this.messageService.save(Message.create(this.text, this.user.id, this.user.displayName))
+    }
     this.text = "";
   }
 

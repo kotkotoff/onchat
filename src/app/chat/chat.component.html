@@ -18,7 +18,7 @@
     </div>
 
     <div class="card-body input-group">
-      <textarea [(ngModel)]="text" name="text" (keyup.enter)="send()" (keydown.control.enter)="newLine()" class="form-control"></textarea>
+      <textarea [(ngModel)]="text" name="text" maxlength="500" (keyup.enter)="send()" (keydown.control.enter)="newLine()" class="form-control"></textarea>
       <div class="input-group-append">
         <button (click)="send()" class="btn btn-outline-success btn-block">Send</button>
       </div>
