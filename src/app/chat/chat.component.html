@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="card p-2" *ngFor="let m of (messages | async); trackBy:track" @appear>
-      <img class="card-img-top" [src]="m.imageUrl" (click)="openGallery(m)">
+      <img class="card-img-top" [src]="m.imageUrl" (click)="onImageClick(m)">
       <div class="card-body">
         <h5 class="card-title">{{ m.name }}</h5>
         <p class="card-text">{{ m.text }}</p>
@@ -25,9 +25,4 @@
   </div>
 </div>
 
-<div class="ng-overlay" *ngIf="opened" (click)="closeGallery()">
-  <div class="ng-gallery-content" >
-  <div class="uil-ring-css" *ngIf="loading"><div></div></div>
-  <img *ngIf="!loading" src="{{imgSrc}}" class="effect" />
-    <span class="info-text"></span>
-  </div>
+<open-image [message]="openMessage$"></open-image>

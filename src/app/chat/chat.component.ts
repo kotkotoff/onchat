@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { trigger, style, state, animate, stagger, query, transition } from '@angular/animations';
+import { trigger, style, animate, transition } from '@angular/animations';
 import { Message } from '../model/message';
 import { UserService } from '../services/user.service';
 import { ChatUser } from '../model/chat-user';
@@ -11,6 +11,7 @@ import 'rxjs/add/operator/merge';
 import { MessageService } from '../services/message.service';
 import { ImageService } from '../services/image.service';
 import { Subject } from 'rxjs/Subject';
+
 
 @Component({
   animations: [
@@ -30,10 +31,8 @@ export class ChatComponent implements OnInit {
   text: string;
   messages: Observable<Message[]> = Observable.empty();
   user: ChatUser;
-  currentSrc: string = "";
-  opened: boolean;
-  imgSrc: string;
-  loading: boolean;
+  currentSrc = "";
+  openMessage$ = new Subject<Message>();
 
   ngOnInit(): void {
     this.messages = this.messageService.list(18);
@@ -65,24 +64,12 @@ export class ChatComponent implements OnInit {
     return item.id;
   }
 
-  onClick(m: Message) {
-
-  }
-
   onTextChanged() {
     const tuple = this.imageService.filter(this.text);
     this.currentSrc = tuple.imageUrl;
   }
 
-  openGallery(m: Message) {
-     this.loading = true;
-     this.opened = true;
-     this.imgSrc = m.imageUrl;
-     this.loading = false;
-  }
-
-  closeGallery() {
-    this.opened = false;
-    this.loading = false;
+  onImageClick(m: Message) {
+    this.openMessage$.next(m);
   }
 }

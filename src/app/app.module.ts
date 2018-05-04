@@ -19,6 +19,7 @@ import { AuthGuard } from './guards/auth-guard.service';
 import { FormsModule } from '@angular/forms';
 import {TimeAgoPipe} from 'time-ago-pipe';
 import { MessageCardComponent } from './message-card/message-card.component';
+import { OpenImageComponent } from './open-image/open-image.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { MessageCardComponent } from './message-card/message-card.component';
     ChatComponent,
     TopNavbarComponent,
     TimeAgoPipe,
-    MessageCardComponent
+    MessageCardComponent,
+    OpenImageComponent
   ],
   imports: [
     BrowserModule,
