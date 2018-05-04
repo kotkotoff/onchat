@@ -3,9 +3,9 @@
   <div class="col-5 card">
     <div class="chat">
       <div class="d-flex flex-column h-100 flex-column-reverse" *ngIf="(messages | async) as msg">
-        <div @appear *ngFor="let m of msg; trackBy:track">
+        <div *ngFor="let m of msg; trackBy:track" [ngClass]="[m.belongsTo(user.id) ? 'from-right' : 'from-left']">
 
-          <div class="p-2 alert alert-warning">
+          <div @appear class="p-2 alert" [ngClass]="[m.belongsTo(user.id) ? 'alert-warning' : 'alert-primary']">
             <div class="row">
               <span class="small-font text-left col">{{ m.name}}</span>
               <span class="small-font text-right col">{{ m.getDate() | timeAgo }} </span>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="card-body input-group">
-      <textarea [(ngModel)]="text" name="text" (keydown.enter)="send()" (keydown.control.enter)="newLine()" class="form-control"></textarea>
+      <textarea [(ngModel)]="text" name="text" (keyup.enter)="send()" (keydown.control.enter)="newLine()" class="form-control"></textarea>
       <div class="input-group-append">
         <button (click)="send()" class="btn btn-outline-success btn-block">Send</button>
       </div>

@@ -1,6 +1,8 @@
 .card {
   background-color: lightgray;
   box-shadow: 2px 2px black;
+  padding-right: 0px;
+  border-radius: 5px;
 }
 
 .clear-sides {
@@ -19,4 +21,12 @@ textarea {
 .small-font {
   color: chocolate;
   font-size: 8pt;
+}
+
+.from-left {
+  padding-right: 20px;
+}
+
+.from-right {
+  padding-left: 20px;
 }

@@ -18,10 +18,10 @@ import { MessageService } from '../services/message.service';
     ]),
     trigger('appear', [
       transition('void => *', [
-        style([{ opacity: 0.1, transform: 'translateX(-100%)' }]),
-        animate('0.3s ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+        style([{ opacity: 0.1, transform: 'scale(0)' }]),
+        animate('0.3s ease-out', style({ opacity: 1, transform: 'scale(1)' }))
       ])
-    ])
+    ]),
   ],
   selector: 'chat',
   templateUrl: './chat.component.html',
@@ -49,11 +49,11 @@ export class ChatComponent implements OnInit{
 
   send() {
     //this.messages.unshift();
-    this.messageService.save(Message.create(this.text, this.user.displayName))
+    this.messageService.save(Message.create(this.text, this.user.id, this.user.displayName))
     this.text = "";
   }
 
   track(index, item) {
     return item.id;
-}
+  }
 }
