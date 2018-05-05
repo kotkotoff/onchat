@@ -3,12 +3,13 @@ import { AngularFireDatabase, AngularFireAction } from 'angularfire2/database';
 import { Message } from '../model/message';
 import { DataSnapshot } from '@firebase/database';
 import { Observable } from 'rxjs/Observable';
+import { UserService } from './user.service';
 
 
 @Injectable()
 export class MessageService {
 
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase, private userService: UserService) { }
 
   list(topN: number): Observable<Message[]> {
     return this.db.list('/messages', ref => ref.orderByChild("date").limitToLast(topN)).
@@ -20,6 +21,11 @@ export class MessageService {
   }
 
   delete(m: Message) {
-    this.db.object('/messages/' + m.id).remove();
+    this.userService.getChatUser().switchMap(chatUser => 
+      this.userService.getUser(chatUser.id).take(1))
+      .subscribe(user => {
+        if (user.isAdmin || user.id == m.userId) 
+          this.db.object('/messages/' + m.id).remove();
+      });
   }
 }

@@ -1,24 +1,23 @@
+import { Post } from "./post";
 
 export class Message {
     id: string;
-    text: string;
     date: number;
     name: string;
     userId: string;
-    imageUrl: string;
+    post: Post;
 
     constructor(id: string, m: Partial<Message>) {
         this.id = id;
-        this.text = m.text;
         this.date = m.date;
         this.name = m.name;
         this.userId = m.userId;
-        this.imageUrl = m.imageUrl;
+        this.post = m.post;
     }
 
-    static create(text: string, userId: string, name: string, imageUrl: string): Message {
+    static create(userId: string, name: string, post: Post): Message {
         const date = new Date().getTime();
-        const m = new Message('', {text, userId, name, date, imageUrl} );
+        const m = new Message('', {userId, name, date, post} );
         return m;
     }
 

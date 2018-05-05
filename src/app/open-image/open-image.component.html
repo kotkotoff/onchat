@@ -1,9 +1,0 @@
-<div class="ng-overlay" *ngIf="(message | async) && opened" (click)="closeImage()">
-  <div class="ng-gallery-content">
-    <div class="uil-ring-css" *ngIf="loading">
-      <div></div>
-    </div>
-    <img *ngIf="!loading" src="{{openedImageSrc}}" class="effect image" />
-    <span class="info-text"></span>
-  </div>
-</div>

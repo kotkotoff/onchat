@@ -1,5 +1,0 @@
-<img class="card-img-top" *ngIf="imageSrc" [src]="imageSrc">
-<div class="card-body input-group">
-  <textarea placeholder="Message with a link..." class="form-control" [(ngModel)]="text" (keyup.enter)="post()" (keydown.control.enter)="newLine()"
-    (input)="onTextChanged()"></textarea>
-</div>

@@ -4,6 +4,16 @@
   display: inline-block;
 }
 
+.video {
+  width: 1000px;
+  height: 600px;
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  margin-top: -50px;
+  margin-left: -50px;
+}
+
 .ng-overlay {
   position: fixed;
   top: 0;
@@ -180,5 +190,3 @@ uiload > div {
     -o-animation: uil-ring-anim 1s linear infinite;
     animation: uil-ring-anim 1s linear infinite;
 }
-
-

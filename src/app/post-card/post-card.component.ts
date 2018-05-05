@@ -2,6 +2,8 @@ import { ChatUser } from './../model/chat-user';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Message } from '../model/message';
 import { MessageService } from '../services/message.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'post-card',
@@ -13,7 +15,9 @@ export class PostCardComponent implements OnInit {
   @Input('user') user: ChatUser;
   @Output('onClick') onClick = new EventEmitter<Message>();
 
-  constructor(private messageService: MessageService) { }
+  _safeLink: SafeResourceUrl;
+
+  constructor(private messageService: MessageService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }
@@ -27,5 +31,10 @@ export class PostCardComponent implements OnInit {
       this.messageService.delete(this.message);
     }
     return false;
+  }
+
+  get safeLink() {
+    if (!this._safeLink) this._safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.message.post.linkUrl); 
+    return this._safeLink;
   }
 }

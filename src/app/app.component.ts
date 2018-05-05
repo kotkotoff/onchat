@@ -10,12 +10,13 @@ import { Router } from '@angular/router';
 })
 
 export class AppComponent {
-  title = 'Onchat';
+  title = 'Share';
 
   constructor(authService: AuthService, router: Router, userService: UserService) {
 
     authService.user$.subscribe(user => {
       if (!user) { return; }
+      console.log('here')
       userService.getUser(user.uid).take(1).subscribe(chatUser => {
         if (chatUser) {
           userService.update(user, chatUser);
@@ -25,7 +26,7 @@ export class AppComponent {
         }
       });
       
-      router.navigate(["/chat"]);
+      router.navigate(['']);
     });
   }
 }

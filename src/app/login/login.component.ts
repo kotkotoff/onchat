@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { AuthService } from '../services/auth.service';
-
 @Component({
   animations: [
     trigger('fade', [
@@ -17,7 +16,8 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   login() {
     this.authService.login();

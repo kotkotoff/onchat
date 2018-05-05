@@ -1,15 +1,24 @@
-<div class="allbody">
-  <div class="card-header">
-    {{ message.name }}
-  </div>
-  <img class="card-img-top" [src]="message.imageUrl" (click)="onImageClick(message)">
-  <div class="card-body">
-    <p class="card-text">{{ message.text }}</p>
-
-  </div>
-  <div class="card-footer text-muted">
-    <p class="alignleft"><small>{{ message.getDate() | timeAgo }}</small></p>
-    <p class="alignright"><a class="card-link" href="#" *ngIf="user.isAdmin" (click)="delete()"><small>delete</small></a></p>
-    <div style="clear: both;"></div>
+<div class="card-header">
+  {{ message.name }}
+</div>
+<img class="card-img-top" [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type!='video'">
+<div *ngIf="message.post.type=='video'" class="card-img-top" (click)="onImageClick(message)">
+  <video preload="metadata" controls="" class="video">
+    <source [src]="safeLink">
+  </video>
+</div>
+<div class="card-body" *ngIf="message.post.text">
+  <p class="card-text">{{ message.post.text }}</p>
+</div>
+<div class="card-footer align-middle">
+  <div class="row text-left">
+    <div class="col-6">
+      <small>{{ message.getDate() | timeAgo }}</small>
+    </div>
+    <div class="col-6 text-right">
+      <a class="card-link" href="#" *ngIf="user.isAdmin || message.userId == user.id" (click)="delete()">
+        <small>delete</small>
+      </a>
+    </div>
   </div>
 </div>

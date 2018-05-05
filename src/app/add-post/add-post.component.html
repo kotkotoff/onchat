@@ -1,0 +1,31 @@
+<div class="card-header">
+  {{ user?.displayName }}
+</div>
+
+<img class="card-img-top" [hidden]="!currentPost.isValid()" *ngIf="currentPost.type!='video'" [src]="currentPost.imageUrl" (load)="currentPost.imageLoaded()">
+<div *ngIf="currentPost.type=='video'" class="card-img-top">
+  <video preload="metadata" controls="" class="video">
+    <source [src]="safeLink">
+  </video>
+</div>
+<div class="card-body input-group">
+  <input placeholder="link..." class="form-control card-text" [(ngModel)]="linkText" (keyup.enter)="post()" (input)="onTextChanged()"
+  />
+</div>
+<div class="card-footer text-muted align-middle">
+  <div class="row">
+    <div class="col-6 text-left">
+        <a class="card-link" (click)="currentPost.clear()">
+            <small>cancel</small>
+          </a>
+    </div>
+    <div class="col-6 text-right">
+        <span *ngIf="!currentPost.isValid()">
+            <small>post something!</small>
+          </span>
+          <a *ngIf="currentPost.isValid()" class="card-link" (click)="post()">
+            <small>post</small>
+          </a>
+    </div>
+  </div>
+</div>
