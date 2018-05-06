@@ -1,7 +1,7 @@
 @import '../../assets/postcard.css';
 
 .row.h-100 {
-  margin-top:20px;
+  margin-top:60px;
 }
 
 @media (min-width: 34em) {

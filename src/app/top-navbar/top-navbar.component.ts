@@ -1,6 +1,6 @@
 import { AuthService } from './../services/auth.service';
 import { UserService } from './../services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ChatUser } from '../model/chat-user';
 import { Observable } from 'rxjs/Observable';
 import { trigger, style, animate, transition } from '@angular/animations';
@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./top-navbar.component.css']
 })
 export class TopNavbarComponent implements OnInit {
+  @Output('onScrollUp') onScrollUp = new EventEmitter<void>();
   user$: Observable<ChatUser>;
 
   constructor(private userService: UserService,
@@ -30,6 +31,10 @@ export class TopNavbarComponent implements OnInit {
    ngOnInit(): void {
     this.user$ = this.userService.getChatUser();
   }
+
+   scrollUp() {
+     this.onScrollUp.emit();
+   }
 
    logout() {
      this.authService.logout();

@@ -85,15 +85,12 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   showMore() {
-    console.log('down')
     this.topN += MainComponent.COUNT_INCREASE;
     this.ngOnDestroy();
     this.subscribe();
   }
-
   
   reset(e) {
-    console.log('up!')
     this.topN = MainComponent.START_COUNT;
     this.ngOnDestroy();
     this.subscribe();

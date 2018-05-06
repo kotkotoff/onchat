@@ -1,18 +1,16 @@
 <open-post [message]="openMessage$"></open-post>
 <div class="row">
   <div class="col-12">
-    <top-navbar> </top-navbar>
+    <top-navbar (onScrollUp)="reset()"></top-navbar>
   </div>
 </div>
 <div id="mainContainer" class="row h-100"  
   debounce
   [infiniteScrollDistance]="1"
-  [infiniteScrollUpDistance]="1"
   infiniteScroll
   [alwaysCallback]="true"
   [infiniteScrollThrottle]="100"
-  (scrolled)="showMore()"
-  (scrolledUp)="reset()">
+  (scrolled)="showMore()">
   <div class="d-flex flex-wrap"  [@listAnimation]="messages.length">
     <div class="card border-secondary">
       <add-post class="h-100" (onPost)="post($event)" [user]="user"></add-post>
