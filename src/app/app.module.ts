@@ -20,6 +20,9 @@ import {TimeAgoPipe} from 'time-ago-pipe';
 import { AddPostComponent } from './add-post/add-post.component';
 import { OpenPostComponent } from './open-post/open-post.component';
 import { PostCardComponent } from './post-card/post-card.component';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
+import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { PostCardComponent } from './post-card/post-card.component';
     TimeAgoPipe,
     AddPostComponent,
     OpenPostComponent,
-    PostCardComponent
+    PostCardComponent,
+    ModalDeleteComponent
   ],
   imports: [
     BrowserModule,
@@ -39,13 +43,16 @@ import { PostCardComponent } from './post-card/post-card.component';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     FormsModule,
+    InfiniteScrollModule,
+    NgbModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: MainComponent, canActivate: [AuthGuard]},
       { path: 'login', component: LoginComponent },
       { path: '**', redirectTo: 'main' }
     ])
   ],
-  providers: [AuthService, UserService, AuthGuard, MessageService],
-  bootstrap: [AppComponent]
+  providers: [AuthService, UserService, AuthGuard, MessageService, NgbActiveModal],
+  bootstrap: [AppComponent],
+  entryComponents: [ModalDeleteComponent]
 })
 export class AppModule { }

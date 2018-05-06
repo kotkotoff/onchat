@@ -14,6 +14,7 @@ export class PostCardComponent implements OnInit {
   @Input('message') message: Message;
   @Input('user') user: ChatUser;
   @Output('onClick') onClick = new EventEmitter<Message>();
+  @Output("onDelete") onDelete = new EventEmitter<Message>();
 
   _safeLink: SafeResourceUrl;
 
@@ -26,11 +27,8 @@ export class PostCardComponent implements OnInit {
     this.onClick.emit(this.message);
   }
 
-  delete() {
-    if(confirm("Delete message?")) {
-      this.messageService.delete(this.message);
-    }
-    return false;
+  deleteClicked(){
+    this.onDelete.emit(this.message);
   }
 
   get safeLink() {

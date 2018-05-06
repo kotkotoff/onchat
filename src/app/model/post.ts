@@ -2,7 +2,7 @@ export class Post {
     static urlRegex = /(https?:\/\/[^ ]*)/;
     static youtube = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
     static coub = /^(http|https)?:\/\/(www\.)?coub\.com\/view\/([a-zA-Z\d]+)/;
-    static directVideo = /^(http|https)?:\/\/(www\.)?([a-zA-Z\.\/\d]+)\.(mp4|webm|ogg)/;
+    static directVideo = /^(http|https)?:\/\/(www\.)?([a-zA-Z\.\/_-\d]+)\.(mp4|webm|ogg)/;
     rawData: string;
 
     text: string;

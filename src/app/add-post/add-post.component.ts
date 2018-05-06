@@ -13,6 +13,7 @@ export class AddPostComponent {
 
   @Input('user') user: ChatUser;
   @Output("onPost") onPost = new EventEmitter<Post>();
+
   linkText: string;
   currentPost: Post;
   _safeLink: SafeResourceUrl;
@@ -37,9 +38,13 @@ export class AddPostComponent {
     if (this.currentPost.isValid()) {
       this.currentPost.check();
       this.onPost.emit(this.currentPost);
-      this.currentPost.clear();
-      this.linkText = "";
-      this._safeLink = null;
+      this.clear();
     }
+  }
+
+  clear() {
+    this.currentPost.clear();
+    this.linkText = "";
+    this._safeLink = null;
   }
 }

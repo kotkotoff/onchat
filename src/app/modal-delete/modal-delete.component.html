@@ -1,0 +1,14 @@
+<div @fade>
+  <div class="modal-header">
+    <h4 class="modal-title">Delete</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>This post will be deleted for good. Are you sure?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Yes</button>
+  </div>
+</div>

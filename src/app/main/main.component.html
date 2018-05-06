@@ -1,19 +1,23 @@
+<open-post [message]="openMessage$"></open-post>
 <div class="row">
   <div class="col-12">
     <top-navbar> </top-navbar>
   </div>
 </div>
-<div class="row h-100">
-  <div class="card-columns" [@listAnimation]="messages.length">
+<div id="mainContainer" class="row h-100"  
+  debounce
+  [infiniteScrollDistance]="1"
+  [infiniteScrollUpDistance]="1"
+  infiniteScroll
+  [alwaysCallback]="true"
+  [infiniteScrollThrottle]="100"
+  (scrolled)="showMore()"
+  (scrolledUp)="reset()">
+  <div class="d-flex flex-wrap"  [@listAnimation]="messages.length">
     <div class="card border-secondary">
-      <add-post (onPost)="post($event)" [user]="user"></add-post>
+      <add-post class="h-100" (onPost)="post($event)" [user]="user"></add-post>
     </div>
-    <div #posts class="card border-secondary" *ngFor="let m of messages; trackBy:track">
-      <post-card [message]="m" [user]="user" (onClick)="onImageClick($event)"></post-card>
+    <div class="card border-secondary" *ngFor="let m of messages; trackBy:track">
+      <post-card class="h-100" [message]="m" [user]="user" (onClick)="onImageClick($event)" (onDelete)="onDeleteClick($event)"></post-card>
     </div>
-  </div>
 </div>
-
-<open-post [message]="openMessage$"></open-post>
-
-

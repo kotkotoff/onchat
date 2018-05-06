@@ -1,14 +1,13 @@
 <div class="card-header">
   {{ message.name }}
 </div>
-<img class="card-img-top" [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type!='video'">
-<div *ngIf="message.post.type=='video'" class="card-img-top" (click)="onImageClick(message)">
-  <video preload="metadata" controls="" class="video">
-    <source [src]="safeLink">
-  </video>
-</div>
-<div class="card-body" *ngIf="message.post.text">
-  <p class="card-text">{{ message.post.text }}</p>
+<div class="card-img-top" title="{{ message.post.text }}" data-toggle="tooltip" data-placement="top">
+  <img [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type!='video'">
+  <div *ngIf="message.post.type=='video'" (click)="onImageClick(message)" class="video">
+    <video preload="metadata" controls="">
+      <source [src]="safeLink">
+    </video>
+  </div>
 </div>
 <div class="card-footer align-middle">
   <div class="row text-left">
@@ -16,8 +15,8 @@
       <small>{{ message.getDate() | timeAgo }}</small>
     </div>
     <div class="col-6 text-right">
-      <a class="card-link" href="#" *ngIf="user.isAdmin || message.userId == user.id" (click)="delete()">
-        <small>delete</small>
+      <a class="card-link" href="#" *ngIf="user.isAdmin || message.userId == user.id" (click)="deleteClicked()">
+        <i class="fas fa-times"></i>
       </a>
     </div>
   </div>
