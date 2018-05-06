@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, OnDestroy, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, EventEmitter, Output, ViewChild, ElementRef, ApplicationRef } from '@angular/core';
 import { Message } from '../model/message';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'open-post',
@@ -19,8 +20,8 @@ export class OpenPostComponent implements OnInit, OnDestroy {
   safeLink: SafeResourceUrl;
   opened: boolean;
   loading : boolean;
-
-  constructor(public sanitizer: DomSanitizer) {
+ 
+  constructor(public sanitizer: DomSanitizer, private appRef: ApplicationRef) {
   }
 
   ngOnInit(): void {
@@ -28,8 +29,9 @@ export class OpenPostComponent implements OnInit, OnDestroy {
       if (m && this.message != m) {
         this.message = m;
         this.safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.message.post.linkUrl);
-        this.loading = true;
+        //this.loading = false;
         this.opened = true;
+        this.appRef.tick();
       }
     });
   }
@@ -52,13 +54,13 @@ export class OpenPostComponent implements OnInit, OnDestroy {
  }
 
  goLeft($event) {
-   this.pushNextAfter(true);
-   $event.stopPropagation();
+   this.pushNextAfter(false);
+   this.blockPropagation($event);
  }
 
  goRight($event) {
-  this.pushNextAfter(false);
-  $event.stopPropagation();
+  this.pushNextAfter(true);
+  this.blockPropagation($event);
  }
 
  pushNextAfter(isRight: boolean) {
@@ -69,8 +71,16 @@ export class OpenPostComponent implements OnInit, OnDestroy {
    } else if (!isRight && index > 0) {
      fountMessage = this.messages[index - 1];
    }
+   console.log(fountMessage)
    if (fountMessage) {
+     this.message = null;
+     this.safeLink = null;
      this.messageSubject.next(fountMessage);
+     //this.loading = true;
    }
+ }
+
+ blockPropagation($event) {
+  $event.stopPropagation();
  }
 }

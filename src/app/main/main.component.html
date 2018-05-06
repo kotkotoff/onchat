@@ -5,7 +5,7 @@
     </div>
 </div>
 <div id="mainContainer " class="row h-100 " debounce [infiniteScrollDistance]="1 " infiniteScroll [alwaysCallback]="true " [infiniteScrollThrottle]="100 " (scrolled)="showMore() ">
-    <div class="d-flex flex-wrap" [@listAnimation]="messages.length">
+    <div class="d-flex flex-wrap justify-content-center" [@listAnimation]="messages.length">
         <div class="card border-secondary ">
             <add-post class="h-100" (onPost)="post($event)" [user]="userService.user"></add-post>
         </div>

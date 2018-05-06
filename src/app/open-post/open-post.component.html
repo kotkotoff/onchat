@@ -1,19 +1,15 @@
-<div class="ng-overlay" *ngIf="opened && message" (click)="close()">
-
-    <div class="ng-gallery-content" (keydown)="goLeft($event)" (keydown.ArrowLeft)="goLeft($event)" (keydown.ArrowRight)="goRight($event)">
-        <div class="uil-ring-css" *ngIf="loading && message.post.type!='video'">
-            <div></div>
-        </div>
+<div class="ng-overlay" *ngIf="opened" (click)="close()" tabindex="0">
+    <div class="ng-gallery-content" *ngIf="message">
+        <a href="#" id="mainOverlay" (keydown.arrowleft)="goLeft($event)" (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#mainOverlay"></a>
         <img src="{{message.post.imageUrl}}" class="effect image" *ngIf="message.post.type == 'image'" (load)="onDataLoad()" />
         <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content video">
-            <iframe [src]="safeLink" allowtransparency allow="autoplay" class="video" frameborder="0" (load)="onDataLoad()"></iframe>
+            <iframe [src]="safeLink" allowtransparency allow="autoplay" class="video" frameborder="0" (load)="onDataLoad()" (click)="blockPropagation($event)" (click)="blockPropagation($event)"></iframe>
         </div>
         <div *ngIf="message.post.type=='video'" class="ng-gallery-content video">
-            <video preload="metadata" autoplay="true" controls="" class="video" (load)="onDataLoad()">
-        <source [src]="safeLink">
-      </video>
+            <video preload="none" #videoPlayer autoplay="true" controls="" class="video" (load)="onDataLoad()" (click)="blockPropagation($event)" (click)="blockPropagation($event)">
+                <source [src]="safeLink">
+            </video>
         </div>
-
         <span class="info-text">
           <div class="row">
             <div class="col-3" style="font-size:4em;"> <a (click)="goLeft($event)"><i class="fas fa-caret-left"></i></a> </div>

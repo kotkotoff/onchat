@@ -23,6 +23,7 @@ import { PostCardComponent } from './post-card/post-card.component';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
 import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
+import { FocusDirective } from './directives/focus.directive';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
     AddPostComponent,
     OpenPostComponent,
     PostCardComponent,
-    ModalDeleteComponent
+    ModalDeleteComponent,
+    FocusDirective
   ],
   imports: [
     BrowserModule,
