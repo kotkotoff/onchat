@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, EventEmitter, Output } from '@angular/core';
 import { Message } from '../model/message';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
-import { EventEmitter } from 'protractor';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
@@ -12,6 +11,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class OpenPostComponent implements OnInit, OnDestroy {
   @Input('message') messageSubject: Subject<Message>;
+  @Input('messages') messages: Message[];
+
   message: Message;
 
   subscription: Subscription;
@@ -48,5 +49,28 @@ export class OpenPostComponent implements OnInit, OnDestroy {
     this.message = null;
     this.opened = false;
     this.safeLink = null;
+ }
+
+ goLeft($event) {
+   this.pushNextAfter(true);
+   $event.stopPropagation();
+ }
+
+ goRight($event) {
+  this.pushNextAfter(false);
+  $event.stopPropagation();
+ }
+
+ pushNextAfter(isRight: boolean) {
+   let index = this.messages.indexOf(this.message);
+   let fountMessage: Message = null;
+   if (isRight && index < this.messages.length - 1) {
+     fountMessage = this.messages[index + 1];
+   } else if (!isRight && index > 0) {
+     fountMessage = this.messages[index - 1];
+   }
+   if (fountMessage) {
+     this.messageSubject.next(fountMessage);
+   }
  }
 }

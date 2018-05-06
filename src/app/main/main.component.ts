@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, style, animate, query, stagger, transition } from '@angular/animations';
 import { Message } from '../model/message';
 import { UserService } from '../services/user.service';
-import { ChatUser } from '../model/chat-user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/merge';
@@ -42,7 +41,6 @@ export class MainComponent implements OnInit, OnDestroy {
   static readonly COUNT_INCREASE = 10;
   subscription: Subscription;
   messages: Message[] = [];
-  user: ChatUser;
   topN: number = MainComponent.START_COUNT;
   
   openMessage$ = new Subject<Message>();
@@ -60,8 +58,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  constructor(userService: UserService, private messageService: MessageService, private modalService: NgbModal) {
-    userService.getChatUser().take(1).subscribe(user => this.user = user);
+  constructor(public userService: UserService, private messageService: MessageService, private modalService: NgbModal) {
   }
 
   onDeleteClick(m: Message) {
@@ -73,7 +70,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   post(post: Post) {
-    this.messageService.save(Message.create(this.user.id, this.user.displayName, post));  
+    this.messageService.save(Message.create(this.userService.user.id, this.userService.user.displayName, post));  
   }
 
   track(index, item) {
@@ -90,7 +87,7 @@ export class MainComponent implements OnInit, OnDestroy {
     this.subscribe();
   }
   
-  reset(e) {
+  reset() {
     this.topN = MainComponent.START_COUNT;
     this.ngOnDestroy();
     this.subscribe();

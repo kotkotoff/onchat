@@ -3,6 +3,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Message } from '../model/message';
 import { MessageService } from '../services/message.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -12,13 +13,12 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 })
 export class PostCardComponent implements OnInit {
   @Input('message') message: Message;
-  @Input('user') user: ChatUser;
   @Output('onClick') onClick = new EventEmitter<Message>();
   @Output("onDelete") onDelete = new EventEmitter<Message>();
 
   _safeLink: SafeResourceUrl;
 
-  constructor(private messageService: MessageService, private sanitizer: DomSanitizer) { }
+  constructor(public userService: UserService, private messageService: MessageService, private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
   }

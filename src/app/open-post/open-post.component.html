@@ -1,19 +1,25 @@
 <div class="ng-overlay" *ngIf="opened && message" (click)="close()">
 
-  <div class="ng-gallery-content">
-    <div class="uil-ring-css" *ngIf="loading && message.post.type!='video'">
-      <div></div>
-    </div>
-    <img src="{{message.post.imageUrl}}" class="effect image" *ngIf="message.post.type == 'image'" (load)="onDataLoad()" />
-    <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content video">
-      <iframe [src]="safeLink" allowtransparency allow="autoplay" class="video" frameborder="0" (load)="onDataLoad()"></iframe>
-    </div>
-    <div *ngIf="message.post.type=='video'" class="ng-gallery-content video">
-      <video preload="metadata" autoplay="true" controls="" class="video" (load)="onDataLoad()">
+    <div class="ng-gallery-content" (keydown)="goLeft($event)" (keydown.ArrowLeft)="goLeft($event)" (keydown.ArrowRight)="goRight($event)">
+        <div class="uil-ring-css" *ngIf="loading && message.post.type!='video'">
+            <div></div>
+        </div>
+        <img src="{{message.post.imageUrl}}" class="effect image" *ngIf="message.post.type == 'image'" (load)="onDataLoad()" />
+        <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content video">
+            <iframe [src]="safeLink" allowtransparency allow="autoplay" class="video" frameborder="0" (load)="onDataLoad()"></iframe>
+        </div>
+        <div *ngIf="message.post.type=='video'" class="ng-gallery-content video">
+            <video preload="metadata" autoplay="true" controls="" class="video" (load)="onDataLoad()">
         <source [src]="safeLink">
       </video>
-    </div>
-    <span class="info-text"></span>
-  </div>
+        </div>
 
+        <span class="info-text">
+          <div class="row">
+            <div class="col-3" style="font-size:4em;"> <a (click)="goLeft($event)"><i class="fas fa-caret-left"></i></a> </div>
+            <div class="col-6"> By {{message.name}} at {{ message.getDate() | date}}</div>
+            <div class="col-3" style="font-size:4em;"><a (click)="goRight($event)"><i class="fas fa-caret-right"></i></a></div>
+        </div>
+      </span>
+    </div>
 </div>

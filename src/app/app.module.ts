@@ -1,7 +1,7 @@
 import { MessageService } from './services/message.service';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
-import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from 'angularfire2';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,7 +16,7 @@ import { MainComponent } from './main/main.component';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { FormsModule } from '@angular/forms';
-import {TimeAgoPipe} from 'time-ago-pipe';
+import { TimeAgoPipe } from 'time-ago-pipe';
 import { AddPostComponent } from './add-post/add-post.component';
 import { OpenPostComponent } from './open-post/open-post.component';
 import { PostCardComponent } from './post-card/post-card.component';

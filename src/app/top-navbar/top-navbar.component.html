@@ -1,12 +1,12 @@
 <div class="navbar fixed-top navbar-dark bg-dark box-shadow">
-  <a class="navbar-brand" href="#">
-    <i style="font-size:2em; color:tomato; vertical-align: middle;" class="fab fa-slideshare"></i>
-    <small>&nbsp;Welcome, {{(user$ | async)?.displayName}}!</small>
-  </a>
-  <button onclick="window.scrollTo(0, 0);" (click)="scrollUp()" class="btn btn-outline-light form-inline my-2 my-lg-1">
+    <a class="navbar-brand" href="#">
+        <i style="font-size:2em; color:tomato; vertical-align: middle;" class="fab fa-slideshare"></i>
+        <small>&nbsp;Welcome, {{userService.user?.displayName}}!</small>
+    </a>
+    <button onclick="window.scrollTo(0, 0);" (click)="scrollUp()" class="btn btn-outline-light form-inline my-2 my-lg-1">
       <i class="fas fa-level-up-alt"></i>
     </button>
-  <button (click)="logout()" class="btn btn-outline-lightc form-inline my-2 my-lg-0">
+    <button (click)="logout()" class="btn btn-outline-lightc form-inline my-2 my-lg-0">
     <i class="fas fa-sign-out-alt"></i>
   </button>
 </div>

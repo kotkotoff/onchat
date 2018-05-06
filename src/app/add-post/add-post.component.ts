@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Message } from '../model/message';
+import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { Post } from '../model/post';
 import { ChatUser } from '../model/chat-user';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';

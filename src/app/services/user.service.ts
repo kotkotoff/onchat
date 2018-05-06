@@ -7,58 +7,48 @@ import * as firebase from 'firebase';
 
 @Injectable()
 export class UserService {
+  private readonly _dbPath: string = '/chat-users/';
+
+  user: ChatUser;
 
   constructor(private db: AngularFireDatabase, private authService: AuthService) { }
 
-  save(user: firebase.User): void {
-    const chatUser = new ChatUser(user.uid,
-      {
-        email: user.email,
-        displayName: user.displayName,
-        isAdmin: false
-      });
-    this.db.object('/chat-users/' + user.uid)
-      .update(chatUser)
-      .then(() => this.cacheUser(chatUser));
-
-  }
-
-  update(user: firebase.User, dbUser: ChatUser) {
-    dbUser.email = user.email;
-    dbUser.displayName = user.displayName;
-    this.db.object('/chat-users/' + user.uid)
-    .update(dbUser)
-    .then(() => this.cacheUser(dbUser));
-  }
-
-  cacheUser(user: ChatUser): void {
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-
-  removeCachedUser(): void {
-    localStorage.clear();
-  }
-
-  getChatUser(): Observable<ChatUser> {
-    const user = this.getUserFromCache();
-    if (user) { return Observable.of(user); }
-    return this.authService.user$
-      .switchMap(u => this.getUser(u.uid));
-  }
-
-  getUser(userId: string): Observable<ChatUser> {
-    return this.db.object('/chat-users/' + userId)
-      .snapshotChanges()
-      .map(s => new ChatUser(s.key, s.payload.val()));
-  }
-
-  private getUserFromCache(): ChatUser|null {
-    try {
-      const userJson = localStorage.getItem("user");
-      if (userJson) {
-        return JSON.parse(userJson);
+  createOrUpdate(user: firebase.User) {
+    let newUser: ChatUser;
+    this.getUser(user.uid).take(1).subscribe(chatUser => {
+      if (chatUser && chatUser.id == user.uid) {
+        newUser = chatUser;
+        newUser.displayName = user.displayName;
+        newUser.email = user.email;
+        newUser.lastVisitDate = new Date().getTime();
+      } else {
+        newUser = new ChatUser(user.uid,
+          {
+            email: user.email,
+            displayName: user.displayName,
+            isAdmin: false,
+            postCount: 0,
+            lastVisitDate: new Date().getTime()
+          });
       }
-    } catch {}
-    return null;
+      this.db.object(this._dbPath + user.uid).update(newUser);
+      this.user = newUser;
+    });
+  }
+
+  login() {
+
+  }
+
+  logout() {
+    this.user = null;
+  }
+
+  private getUser(userId: string): Observable<ChatUser|null> {
+     return this.db.object(this._dbPath + userId)
+      .snapshotChanges()
+      .map(s => { 
+        return s.key? new ChatUser(s.key, s.payload.val()) : null;
+       });
   }
 }
