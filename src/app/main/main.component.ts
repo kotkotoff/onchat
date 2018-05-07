@@ -3,7 +3,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Message } from '../model/message';
 import { MessageService } from '../services/message.service';
 import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import { Post } from '../model/post';
 import { Subject } from 'rxjs/Subject';
@@ -11,6 +10,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { UserService } from '../services/user.service';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/merge';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 
 @Component({
   animations: [
@@ -58,6 +59,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   openMessage$ = new Subject<Message>();
   openIndex: number;
+  bsModalRef: BsModalRef;
 
   ngOnInit(): void {
     this.subscribe();
@@ -76,16 +78,16 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(
     public userService: UserService,
     private messageService: MessageService,
-    private modalService: NgbModal
+    private modalService: BsModalService
   ) {}
 
   onDeleteClick(m: Message) {
-    const modalRef = this.modalService.open(ModalDeleteComponent);
-    modalRef.result
-      .then(() => {
+    this.bsModalRef = this.modalService.show(ModalDeleteComponent);
+    this.bsModalRef.content.onClose.subscribe(result => {
+      if (result) {
         this.messageService.delete(m);
-      })
-      .catch(x => {});
+      }
+    });
   }
 
   post(post: Post) {

@@ -15,7 +15,6 @@ import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { MessageService } from './services/message.service';
 import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
-import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { OpenPostComponent } from './open-post/open-post.component';
 import { PostCardComponent } from './post-card/post-card.component';
@@ -23,6 +22,7 @@ import { RouterModule } from '@angular/router';
 import { TimeAgoPipe } from 'time-ago-pipe';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 import { UserService } from './services/user.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -46,14 +46,14 @@ import { UserService } from './services/user.service';
     AngularFireDatabaseModule,
     FormsModule,
     InfiniteScrollModule,
-    NgbModule.forRoot(),
+    ModalModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: MainComponent, canActivate: [AuthGuard]},
       { path: 'login', component: LoginComponent },
       { path: '**', redirectTo: 'main' }
     ])
   ],
-  providers: [AuthService, UserService, AuthGuard, MessageService, NgbActiveModal],
+  providers: [AuthService, UserService, AuthGuard, MessageService],
   bootstrap: [AppComponent],
   entryComponents: [ModalDeleteComponent]
 })
