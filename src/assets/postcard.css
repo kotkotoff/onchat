@@ -13,13 +13,15 @@
 
 img {
     width:100%;
-    height: 156px;
+    height: 170px;
     object-fit: cover;
+    padding: 5px;
 }
 
 video {
     width:100%;
-    height: 150px;
+    height: 170px;
+    padding: 5px;
 }
 
 img:hover {
@@ -36,7 +38,7 @@ img:hover {
 }
 
 
-.card { 
+.card {
     width: 18rem;
     display: inline-block;
     margin: 6px;

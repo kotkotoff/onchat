@@ -1,3 +1,4 @@
+import { CommentService } from './services/comment.service';
 import { AddPostComponent } from './add-post/add-post.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -23,7 +24,7 @@ import { TimeAgoPipe } from 'time-ago-pipe';
 import { TopNavbarComponent } from './top-navbar/top-navbar.component';
 import { UserService } from './services/user.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
-
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   declarations: [
@@ -47,13 +48,14 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     FormsModule,
     InfiniteScrollModule,
     ModalModule.forRoot(),
+    TabsModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: MainComponent, canActivate: [AuthGuard]},
       { path: 'login', component: LoginComponent },
       { path: '**', redirectTo: 'main' }
     ])
   ],
-  providers: [AuthService, UserService, AuthGuard, MessageService],
+  providers: [AuthService, UserService, AuthGuard, MessageService, CommentService],
   bootstrap: [AppComponent],
   entryComponents: [ModalDeleteComponent]
 })

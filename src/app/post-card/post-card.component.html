@@ -1,14 +1,31 @@
-<div class="card-header">
-  {{ message.name }}
-</div>
-<div class="card-img-top" title="{{ message.post.text }}" data-toggle="tooltip" data-placement="top">
-  <img [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type!='video'">
-  <div *ngIf="message.post.type=='video'" (click)="onImageClick(message)" class="video">
-    <video preload="metadata" controls="">
-      <source [src]="safeLink">
-    </video>
-  </div>
-</div>
+<!-- <div class="card-header">
+
+</div> -->
+<tabset [justified]="true">
+  <tab heading="{{ message.name }}">
+      <img class="center-image" [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type!='video'">
+      <div *ngIf="message.post.type=='video'" (click)="onImageClick(message)" class="video">
+        <video class="center-image" preload="metadata" controls="">
+          <source [src]="safeLink">
+        </video>
+      </div>
+  </tab>
+  <tab (select)="onCommentTabSelect()">
+    <ng-template tabHeading>
+      <i class="far fa-comments"></i>
+    </ng-template>
+
+    <div class="row" style="overflow-y: scroll; height: 80%; width: 100%; margin: 0px;">
+        <ul class="list-group w-100" style="padding: 10px;" *ngIf="(comments | async) as coms">
+            <li class="w-100" *ngFor="let c of coms.list">
+              <strong>{{c.userName}}: </strong>{{ c.comment }}
+            </li>
+        </ul>
+    </div>
+    <div class="row" style="width: 100%; margin: 0px;">
+        <input style="height:20%;" [(ngModel)]="newCommentText" type="text" placeholder="Add comment..." class="form-control" (keydown.enter)="addComment()"></div>
+  </tab>
+</tabset>
 <div class="card-footer align-middle">
   <div class="row text-left">
     <div class="col-6">
