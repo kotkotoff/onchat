@@ -4,13 +4,10 @@
 }
 
 .video {
-    width: 1000px;
-    height: 600px;
-    position: absolute;
-    top: 30%;
-    left: 30%;
-    margin-top: -50px;
-    margin-left: -50px;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .ng-overlay {

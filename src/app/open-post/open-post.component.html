@@ -2,12 +2,11 @@
     <div class="ng-gallery-content" *ngIf="message">
         <a href="#" id="mainOverlay" (keydown.arrowleft)="goLeft($event)" (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#mainOverlay"></a>
         <img src="{{message.post.imageUrl}}" class="effect image" *ngIf="message.post.type == 'image'" (load)="onDataLoad()" />
-        <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content video">
+        <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content">
             <iframe [src]="safeLink" allowtransparency allow="autoplay" class="video" frameborder="0" (load)="onDataLoad()" (click)="blockPropagation($event)" (click)="blockPropagation($event)"></iframe>
         </div>
-        <div *ngIf="message.post.type=='video'" class="ng-gallery-content video">
-            <video preload="none" #videoPlayer autoplay="true" controls="" class="video" (load)="onDataLoad()" (click)="blockPropagation($event)" (click)="blockPropagation($event)">
-                <source [src]="safeLink">
+        <div *ngIf="message.post.type=='video'" class="ng-gallery-content">
+            <video preload="none" #videoPlayer autoplay="true" controls="" class="video" (load)="onDataLoad()" [src]="safeLink" (click)="blockPropagation($event)" (click)="blockPropagation($event)">
             </video>
         </div>
         <span class="info-text">
