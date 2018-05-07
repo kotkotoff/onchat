@@ -4,8 +4,8 @@
 </div>
 
 <div class="card-img-top">
-    <img [hidden]="!currentPost.isValid()" *ngIf="currentPost.type!='video'" [src]="currentPost.imageUrl" (load)="currentPost.imageLoaded()">
-    <div *ngIf="currentPost.type=='video'" class="video">
+    <img [hidden]="!currentPost.isValid()" *ngIf="currentPost.type!='video' && currentPost.imageUrl" [src]="currentPost.imageUrl" (load)="currentPost.imageLoaded()">
+    <div *ngIf="currentPost.type=='video' && currentPost.linkUrl" class="video">
         <video preload="metadata" controls="">
       <source [src]="safeLink">
     </video>
