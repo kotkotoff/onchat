@@ -1,20 +1,44 @@
-<div class="ng-overlay" *ngIf="opened" (click)="close()" tabindex="0">
-    <div class="ng-gallery-content" *ngIf="message">
-        <a href="#" id="mainOverlay" (keydown.arrowleft)="goLeft($event)" (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#mainOverlay"></a>
-        <img src="{{message.post.imageUrl}}" class="effect image" *ngIf="message.post.type == 'image'" (load)="onDataLoad()" />
-        <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content">
-            <iframe [src]="safeLink" allowtransparency allow="autoplay" class="video" frameborder="0" (load)="onDataLoad()" (click)="blockPropagation($event)" (click)="blockPropagation($event)"></iframe>
-        </div>
-        <div *ngIf="message.post.type=='video'" class="ng-gallery-content">
-            <video preload="none" #videoPlayer autoplay="true" controls="" class="video" (load)="onDataLoad()" [src]="safeLink" (click)="blockPropagation($event)" (click)="blockPropagation($event)">
-            </video>
-        </div>
-        <span class="info-text">
-          <div class="row">
-            <div class="col-3" style="font-size:4em;"> <a (click)="goLeft($event)"><i class="fas fa-caret-left"></i></a> </div>
-            <div class="col-6"> By {{message.name}} at {{ message.getDate() | date}}</div>
-            <div class="col-3" style="font-size:4em;"><a (click)="goRight($event)"><i class="fas fa-caret-right"></i></a></div>
-        </div>
-      </span>
+<div class="ng-overlay" *ngIf="opened" (click)="close()">
+  <div class="ng-gallery-content" *ngIf="message">
+    <a href="#" id="hiddenFocus" (keydown.arrowleft)="goLeft($event)"
+      (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#hiddenFocus"></a>
+    <img *ngIf="message.post.type=='image'" src="{{message.post.imageUrl}}" class="effect image" (load)="onDataLoad()" />
+    <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content">
+      <iframe [src]="safeLink" allowtransparency allow="autoplay" class="video" (load)="onDataLoad()" (click)="blockPropagation($event)"></iframe>
     </div>
+    <div *ngIf="message.post.type=='video'" class="ng-gallery-content">
+      <video preload="none" #videoPlayer autoplay="true" controls="" class="video" (load)="onDataLoad()" [src]="safeLink" (click)="blockPropagation($event)">
+      </video>
+    </div>
+    <span class="info-text">
+      <div class="d-flex flex-row justify-content-center align-self-center">
+        <div class="p-2" style="font-size:4em;">
+          <a (click)="goLeft($event)">
+            <i class="fas fa-caret-left"></i>
+          </a>
+        </div>
+        <span class="p-2 bottom-text">By {{message.name}} at {{ message.getDate() | date}}</span>
+        <div class="p-2" style="font-size:4em;">
+          <a (click)="goRight($event)">
+            <i class="fas fa-caret-right"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+    <!-- <span class="info-text">
+      <div class="row">
+        <div class="col-3" style="font-size:4em;">
+          <a (click)="goLeft($event)">
+            <i class="fas fa-caret-left"></i>
+          </a>
+        </div>
+        <div class="col-6"><span class="align-middle">By {{message.name}} at {{ message.getDate() | date}}</span></div>
+        <div class="col-3" style="font-size:4em;">
+          <a (click)="goRight($event)">
+            <i class="fas fa-caret-right"></i>
+          </a>
+        </div>
+      </div>
+    </span> -->
+  </div>
 </div>

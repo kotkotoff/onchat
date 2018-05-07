@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, EventEmitter, Output, ViewChild, ElementRef, ApplicationRef } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Message } from '../model/message';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
@@ -19,25 +19,21 @@ export class OpenPostComponent implements OnInit, OnDestroy {
   subscription: Subscription;
   safeLink: SafeResourceUrl;
   opened: boolean;
-  loading : boolean;
- 
-  constructor(public sanitizer: DomSanitizer, private appRef: ApplicationRef) {
+
+  constructor(public sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
     this.messageSubject.subscribe(m => {
-      if (m && this.message != m) {
+      if (m && this.message !== m) {
         this.message = m;
         this.safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.message.post.linkUrl);
-        //this.loading = false;
         this.opened = true;
-        this.appRef.tick();
       }
     });
   }
 
   onDataLoad() {
-    this.loading = false;
   }
 
   ngOnDestroy(): void {
@@ -47,7 +43,6 @@ export class OpenPostComponent implements OnInit, OnDestroy {
   }
 
  close() {
-    this.loading = false;
     this.message = null;
     this.opened = false;
     this.safeLink = null;
@@ -64,19 +59,17 @@ export class OpenPostComponent implements OnInit, OnDestroy {
  }
 
  pushNextAfter(isRight: boolean) {
-   let index = this.messages.indexOf(this.message);
+   const index = this.messages.indexOf(this.message);
    let fountMessage: Message = null;
    if (isRight && index < this.messages.length - 1) {
      fountMessage = this.messages[index + 1];
    } else if (!isRight && index > 0) {
      fountMessage = this.messages[index - 1];
    }
-   console.log(fountMessage)
    if (fountMessage) {
      this.message = null;
      this.safeLink = null;
      this.messageSubject.next(fountMessage);
-     //this.loading = true;
    }
  }
 

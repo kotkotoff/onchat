@@ -1,10 +1,10 @@
-import { NgZone, Renderer, Directive, Input } from '@angular/core';
+import { NgZone, Renderer, Directive, Input, OnInit } from '@angular/core';
 
 @Directive({
     selector: '[focusDirective]'
 })
-export class FocusDirective {
-    @Input() cssSelector: string
+export class FocusDirective implements OnInit {
+    @Input() cssSelector: string;
 
     constructor(
         private ngZone: NgZone,
