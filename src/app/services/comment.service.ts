@@ -20,4 +20,8 @@ export class CommentService {
   save(id: string, comment: Comment) {
     this.db.list(this._dbPath + id + '/list/').push(comment);
   }
+
+  delete (id: string) {
+    this.db.object(this._dbPath + id).remove();
+  }
 }

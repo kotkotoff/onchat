@@ -1,15 +1,15 @@
 <div class="ng-overlay" *ngIf="opened" (click)="close()">
-  <div class="ng-gallery-content" *ngIf="message">
-    <a href="#" id="hiddenFocus" (keydown.arrowleft)="goLeft($event)" (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#hiddenFocus"></a>
-    <img *ngIf="message.post.type=='image'" src="{{message.post.imageUrl}}" class="effect image" (load)="onDataLoad()" />
-    <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content">
-      <iframe [src]="safeLink" allowtransparency allow="autoplay" class="video" (load)="onDataLoad()" (click)="blockPropagation($event)"></iframe>
-    </div>
-    <div *ngIf="message.post.type=='video'" class="ng-gallery-content">
-      <video preload="none" #videoPlayer autoplay="true" controls="" class="video" (load)="onDataLoad()" [src]="safeLink" (click)="blockPropagation($event)">
+    <div class="ng-gallery-content" *ngIf="message">
+        <a href="#" id="hiddenFocus" (keydown.arrowleft)="goLeft($event)" (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#hiddenFocus"></a>
+        <img *ngIf="message.post.type=='image'" src="{{message.post.imageUrl}}" class="effect image" (load)="onDataLoad()" />
+        <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content">
+            <iframe [src]="safeLink" allowtransparency allow="autoplay" width="800" height="600" class="video" (load)="onDataLoad()" (click)="blockPropagation($event)"></iframe>
+        </div>
+        <div *ngIf="message.post.type=='video'" class="ng-gallery-content">
+            <video preload="none" #videoPlayer autoplay="true" controls="" class="video" (load)="onDataLoad()" [src]="safeLink" (click)="blockPropagation($event)">
       </video>
-    </div>
-    <span class="info-text">
+        </div>
+        <span class="info-text">
       <div class="d-flex flex-row justify-content-center align-self-center">
         <div class="p-2" style="font-size:4em;">
           <a (click)="goLeft($event)">
@@ -18,11 +18,11 @@
         </div>
         <span class="p-2 bottom-text">By {{message.name}} at {{ message.getDate() | date}}</span>
         <div class="p-2" style="font-size:4em;">
-          <a (click)="goRight($event)">
-            <i class="fas fa-caret-right"></i>
-          </a>
+            <a (click)="goRight($event)">
+                <i class="fas fa-caret-right"></i>
+            </a>
         </div>
-      </div>
+    </div>
     </span>
-  </div>
+</div>
 </div>

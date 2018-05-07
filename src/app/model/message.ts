@@ -6,8 +6,6 @@ export class Message {
     name: string;
     userId: string;
     post: Post;
-    likes?: number;
-    dislikes?: number;
 
     constructor(id: string, m: Partial<Message>) {
         this.id = id;
@@ -15,8 +13,6 @@ export class Message {
         this.name = m.name;
         this.userId = m.userId;
         this.post = m.post;
-        this.likes = m.likes;
-        this.dislikes = m.dislikes;
     }
 
     static create(userId: string, name: string, post: Post): Message {

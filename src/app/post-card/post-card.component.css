@@ -1,1 +1,26 @@
 @import '../../assets/postcard.css';
+.messages {
+    overflow-y: scroll;
+    height: 80%;
+    width: 100%;
+    margin: 0px;
+    font-size: small;
+}
+
+.messages>ul {
+    padding: 10px;
+}
+
+.message-input {
+    width: 100%;
+    margin: 0px;
+}
+
+.message-input>input {
+    margin-top: 5px;
+    height: 20%;
+}
+
+.bottom-line {
+    line-height: 1;
+}

@@ -81,7 +81,7 @@ export class OpenPostComponent implements OnInit, OnDestroy {
  pushNextAfter(isRight: boolean) {
    if (!this.messages || (isRight && this.hasMoreMessages && this.messageIndex >= this.messages.length - 1)) {
      this.retrieve(isRight);
-   } else if (this.hasMoreMessages) {
+   } else if (this.hasMoreMessages || !isRight) {
     this.getNextMessage(isRight);
    }
   }

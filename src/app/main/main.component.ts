@@ -20,11 +20,11 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
         query(
           ":enter",
           [
-            style({ opacity: 0, transform: "scale(0) rotate(360deg)" }),
+            style({ opacity: 0, transform: "scale(0) translateY(-100%)" }),
             stagger(100, [
               animate(
                 "0.25s",
-                style({ opacity: 1, transform: "scale(1) rotate(0deg)" })
+                style({ opacity: 1, transform: "scale(1) translateY(0)" })
               )
             ])
           ],

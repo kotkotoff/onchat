@@ -1,40 +1,47 @@
-<!-- <div class="card-header">
-
-</div> -->
 <tabset [justified]="true">
-  <tab heading="{{ message.name }}">
-      <img class="center-image" [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type!='video'">
-      <div *ngIf="message.post.type=='video'" (click)="onImageClick(message)" class="video">
-        <video class="center-image" preload="metadata" controls="">
+    <tab>
+        <ng-template tabHeading>
+            <i class="far fa-image"></i>
+        </ng-template>
+
+        <img class="center-image" [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type!='video'">
+        <div *ngIf="message.post.type=='video'" (click)="onImageClick(message)" class="video">
+            <video class="center-image" preload="metadata" controls="">
           <source [src]="safeLink">
         </video>
-      </div>
-  </tab>
-  <tab (select)="onCommentTabSelect()">
-    <ng-template tabHeading>
-      <i class="far fa-comments"></i>
-    </ng-template>
+        </div>
+    </tab>
+    <tab (select)="onCommentTabSelect()">
+        <ng-template tabHeading>
+            <i class="far fa-comments"></i>
+        </ng-template>
 
-    <div class="row" style="overflow-y: scroll; height: 80%; width: 100%; margin: 0px;">
-        <ul class="list-group w-100" style="padding: 10px;" *ngIf="(comments | async) as coms">
-            <li class="w-100" *ngFor="let c of coms.list">
-              <strong>{{c.userName}}: </strong>{{ c.comment }}
-            </li>
-        </ul>
-    </div>
-    <div class="row" style="width: 100%; margin: 0px;">
-        <input style="height:20%;" [(ngModel)]="newCommentText" type="text" placeholder="Add comment..." class="form-control" (keydown.enter)="addComment()"></div>
-  </tab>
+        <div class="row messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+            <ul class="list-group w-100" *ngIf="(comments | async) as coms">
+                <li class="w-100" *ngFor="let c of coms.list">
+                    <strong>{{c.userName}}: </strong>{{ c.comment }}
+                </li>
+            </ul>
+        </div>
+        <div class="row message-input">
+            <input [(ngModel)]="newCommentText" type="text" placeholder="Add comment..." class="form-control" (keydown.enter)="addComment()"></div>
+    </tab>
 </tabset>
 <div class="card-footer align-middle">
-  <div class="row text-left">
-    <div class="col-6">
-      <small>{{ message.getDate() | timeAgo }}</small>
+    <div class="row text-left">
+        <div class="col-3 text-left">
+            <a class="card-link" href="#" *ngIf="userService.user?.isAdmin || message.userId == userService.user?.id" (click)="deleteClicked()">
+                <i class="fas fa-times"></i>
+            </a>
+        </div>
+        <div class="col-6 bottom-line text-center">
+            <strong>{{ message.name }}</strong><br>
+            <small>{{ message.getDate() | timeAgo }}</small>
+        </div>
+        <div class="col-3 text-right">
+            <a class="card-link" href="#" *ngIf="userService.user?.isAdmin || message.userId == userService.user?.id" (click)="deleteClicked()">
+                <i class="far fa-heart"></i>
+            </a>
+        </div>
     </div>
-    <div class="col-6 text-right">
-      <a class="card-link" href="#" *ngIf="userService.user?.isAdmin || message.userId == userService.user?.id" (click)="deleteClicked()">
-        <i class="fas fa-times"></i>
-      </a>
-    </div>
-  </div>
 </div>
