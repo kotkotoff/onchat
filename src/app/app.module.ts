@@ -1,29 +1,29 @@
-import { MessageService } from './services/message.service';
-import { UserService } from './services/user.service';
-import { AuthService } from './services/auth.service';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { AngularFireModule } from 'angularfire2';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { AddPostComponent } from './add-post/add-post.component';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
-
+import { AngularFireModule } from 'angularfire2';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './guards/auth-guard.service';
+import { AuthService } from './services/auth.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 import { environment } from './../environments/environment';
+import { FocusDirective } from './directives/focus.directive';
+import { FormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
-import { TopNavbarComponent } from './top-navbar/top-navbar.component';
-import { AuthGuard } from './guards/auth-guard.service';
-import { FormsModule } from '@angular/forms';
-import { TimeAgoPipe } from 'time-ago-pipe';
-import { AddPostComponent } from './add-post/add-post.component';
+import { MessageService } from './services/message.service';
+import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from '@angular/core';
 import { OpenPostComponent } from './open-post/open-post.component';
 import { PostCardComponent } from './post-card/post-card.component';
-import { InfiniteScrollModule } from "ngx-infinite-scroll";
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalDeleteComponent } from './modal-delete/modal-delete.component';
-import { FocusDirective } from './directives/focus.directive';
+import { RouterModule } from '@angular/router';
+import { TimeAgoPipe } from 'time-ago-pipe';
+import { TopNavbarComponent } from './top-navbar/top-navbar.component';
+import { UserService } from './services/user.service';
+
 
 @NgModule({
   declarations: [

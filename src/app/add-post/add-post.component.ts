@@ -1,8 +1,8 @@
-import { LinkParser } from './../model/link-parser';
-import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Post } from '../model/post';
 import { ChatUser } from '../model/chat-user';
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { LinkParser } from './../model/link-parser';
+import { Post } from '../model/post';
 
 @Component({
   selector: 'add-post',
@@ -12,7 +12,7 @@ import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 export class AddPostComponent {
 
   @Input('user') user: ChatUser;
-  @Output("onPost") onPost = new EventEmitter<Post>();
+  @Output("addPost") addPost = new EventEmitter<Post>();
 
   linkParser: LinkParser = new LinkParser();
   linkText: string;
@@ -40,7 +40,7 @@ export class AddPostComponent {
   post() {
     if (this.currentPost.isValid()) {
       this.linkParser.check(this.currentPost);
-      this.onPost.emit(this.currentPost);
+      this.addPost.emit(this.currentPost);
       this.clear();
     }
   }

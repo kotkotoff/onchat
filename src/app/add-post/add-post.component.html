@@ -1,31 +1,33 @@
 <div class="card-header input-group">
-    <input #p="ngModel" required placeholder="link..." class="form-control card-text" [class.valid-input]="linkText && linkText.length > 0 && p.touched && currentPost.isValid()" [class.invalid-input]="linkText && linkText.length > 0 && p.touched && !currentPost.isValid()"
-        [(ngModel)]="linkText" name="linkText" (keyup.enter)="post()" (input)="onTextChanged()" />
+  <input #p="ngModel" required placeholder="link..." class="form-control card-text" [class.valid-input]="linkText && linkText.length > 0 && p.touched && currentPost.isValid()"
+    [class.invalid-input]="linkText && linkText.length > 0 && p.touched && !currentPost.isValid()" [(ngModel)]="linkText" name="linkText"
+    (keyup.enter)="post()" (input)="onTextChanged()" />
 </div>
 
 <div class="card-img-top">
-    <img [hidden]="!currentPost.isValid()" *ngIf="currentPost.type!='video' && currentPost.imageUrl" [src]="currentPost.imageUrl" (load)="currentPost.imageLoaded()">
-    <div *ngIf="currentPost.type=='video' && currentPost.linkUrl" class="video">
-        <video preload="metadata" controls="">
+  <img [hidden]="!currentPost.isValid()" *ngIf="currentPost.type!='video' && currentPost.imageUrl" [src]="currentPost.imageUrl"
+    (load)="currentPost.imageLoaded()">
+  <div *ngIf="currentPost.type=='video' && currentPost.linkUrl" class="video">
+    <video preload="metadata" controls="">
       <source [src]="safeLink">
     </video>
-    </div>
+  </div>
 </div>
 
 <div class="card-footer align-middle">
-    <div class="row">
-        <div class="col-6 text-left">
-            <a class="card-link" href="#" (click)="clear()">
-                <i class="far fa-trash-alt"></i>
-            </a>
-        </div>
-        <div class="col-6 text-right">
-            <span *ngIf="!currentPost.isValid()">
-            <small>post something!</small>
-          </span>
-            <a *ngIf="currentPost.isValid()" href="#" class="card-link" (click)="post()">
-                <i class="far fa-check-circle"></i>
-            </a>
-        </div>
+  <div class="row">
+    <div class="col-6 text-left">
+      <a class="card-link" href="#" (click)="clear()">
+        <i class="far fa-trash-alt"></i>
+      </a>
     </div>
+    <div class="col-6 text-right">
+      <span *ngIf="!currentPost.isValid()">
+        <small>post something!</small>
+      </span>
+      <a *ngIf="currentPost.isValid()" href="#" class="card-link" (click)="post()">
+        <i class="far fa-check-circle"></i>
+      </a>
+    </div>
+  </div>
 </div>

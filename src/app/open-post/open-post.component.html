@@ -1,7 +1,6 @@
 <div class="ng-overlay" *ngIf="opened" (click)="close()">
   <div class="ng-gallery-content" *ngIf="message">
-    <a href="#" id="hiddenFocus" (keydown.arrowleft)="goLeft($event)"
-      (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#hiddenFocus"></a>
+    <a href="#" id="hiddenFocus" (keydown.arrowleft)="goLeft($event)" (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#hiddenFocus"></a>
     <img *ngIf="message.post.type=='image'" src="{{message.post.imageUrl}}" class="effect image" (load)="onDataLoad()" />
     <div *ngIf="message.post.type=='youtube' || message.post.type=='coub'" class="ng-gallery-content">
       <iframe [src]="safeLink" allowtransparency allow="autoplay" class="video" (load)="onDataLoad()" (click)="blockPropagation($event)"></iframe>
@@ -25,20 +24,5 @@
         </div>
       </div>
     </span>
-    <!-- <span class="info-text">
-      <div class="row">
-        <div class="col-3" style="font-size:4em;">
-          <a (click)="goLeft($event)">
-            <i class="fas fa-caret-left"></i>
-          </a>
-        </div>
-        <div class="col-6"><span class="align-middle">By {{message.name}} at {{ message.getDate() | date}}</span></div>
-        <div class="col-3" style="font-size:4em;">
-          <a (click)="goRight($event)">
-            <i class="fas fa-caret-right"></i>
-          </a>
-        </div>
-      </div>
-    </span> -->
   </div>
 </div>

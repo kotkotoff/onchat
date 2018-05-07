@@ -1,4 +1,3 @@
-import { ChatUser } from './../model/chat-user';
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Message } from '../model/message';
 import { MessageService } from '../services/message.service';
@@ -13,8 +12,8 @@ import { UserService } from '../services/user.service';
 })
 export class PostCardComponent implements OnInit {
   @Input('message') message: Message;
-  @Output('onClick') onClick = new EventEmitter<Message>();
-  @Output("onDelete") onDelete = new EventEmitter<Message>();
+  @Output('postClicked') postClicked = new EventEmitter<Message>();
+  @Output("postDeleted") postDeleted = new EventEmitter<Message>();
 
   _safeLink: SafeResourceUrl;
 
@@ -24,15 +23,17 @@ export class PostCardComponent implements OnInit {
   }
 
   onImageClick() {
-    this.onClick.emit(this.message);
+    this.postClicked.emit(this.message);
   }
 
-  deleteClicked(){
-    this.onDelete.emit(this.message);
+  deleteClicked() {
+    this.postDeleted.emit(this.message);
   }
 
   get safeLink() {
-    if (!this._safeLink) this._safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.message.post.linkUrl); 
+    if (!this._safeLink) {
+      this._safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.message.post.linkUrl);
+    }
     return this._safeLink;
   }
 }

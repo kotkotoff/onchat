@@ -1,9 +1,9 @@
+import * as firebase from 'firebase';
+import { AngularFireDatabase } from 'angularfire2/database';
 import { AuthService } from './auth.service';
-import { Observable } from 'rxjs/Observable';
 import { ChatUser } from './../model/chat-user';
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from 'angularfire2/database';
-import * as firebase from 'firebase';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
@@ -47,8 +47,8 @@ export class UserService {
   private getUser(userId: string): Observable<ChatUser|null> {
      return this.db.object(this._dbPath + userId)
       .snapshotChanges()
-      .map(s => { 
-        return s.key? new ChatUser(s.key, s.payload.val()) : null;
+      .map(s => {
+        return s.key ? new ChatUser(s.key, s.payload.val()) : null;
        });
   }
 }

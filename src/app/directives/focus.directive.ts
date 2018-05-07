@@ -1,4 +1,4 @@
-import { NgZone, Renderer, Directive, Input, OnInit } from '@angular/core';
+import { Directive, Input, NgZone, OnInit, Renderer } from '@angular/core';
 
 @Directive({
     selector: '[focusDirective]'

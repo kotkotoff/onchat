@@ -1,7 +1,5 @@
 export class Post {
-
   rawData: string;
-
   text: string;
   imageUrl: string;
   linkUrl: string;
