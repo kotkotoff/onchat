@@ -2,6 +2,8 @@
   padding: 40px;
   box-shadow: 5px 5px 5px black;
   border-radius: 5px;
+  background-color: dimgray;
+  width: 300px;
 }
 
 .container {
@@ -11,3 +13,4 @@
 .row {
   height: 100%;
 }
+

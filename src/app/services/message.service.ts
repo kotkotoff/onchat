@@ -23,7 +23,7 @@ export class MessageService {
 
   delete(message: Message) {
     const user = this.userService.user;
-    if (user && (user.isAdmin || user.id == message.userId)) {
+    if (user && (user.isAdmin || user.id === message.userId)) {
       this.db.object(this._dbPath + message.id).remove();
       this.commentService.delete(message.id);
     }

@@ -24,3 +24,7 @@
 .bottom-line {
     line-height: 1;
 }
+
+ul {
+  list-style-type: none;
+}

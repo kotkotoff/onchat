@@ -1,4 +1,5 @@
 import { Post } from "./post";
+import { ChatUser } from "./chat-user";
 
 export class Message {
     id: string;
@@ -7,7 +8,7 @@ export class Message {
     userId: string;
     post: Post;
     hasComments?: false;
-    likes?: string[]
+    likes?: string[];
 
     constructor(id: string, m: Partial<Message>) {
         this.id = id;
@@ -28,12 +29,12 @@ export class Message {
         return new Date(this.date);
     }
 
-    belongsTo(userId: string): boolean  {
-        return this.userId === userId;
+    canEdit(user: ChatUser): boolean  {
+        return !!user && (this.userId === user.id || user.isAdmin);
     }
 
-    isLiked(userId) : boolean {
-        return this.likes && this.likes.indexOf(userId) > -1;
+    isLiked(userId: string): boolean {
+        return !!this.likes && this.likes.indexOf(userId) > -1;
     }
 }
 

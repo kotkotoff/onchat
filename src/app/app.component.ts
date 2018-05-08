@@ -15,7 +15,10 @@ export class AppComponent {
   constructor(authService: AuthService, router: Router, userService: UserService) {
 
     authService.user$.subscribe(user => {
-      if (!user) { return; }
+      if (!user) {
+        router.navigate(['login']);
+        return;
+      }
       userService.createOrUpdate(user);
       router.navigate(['']);
     });

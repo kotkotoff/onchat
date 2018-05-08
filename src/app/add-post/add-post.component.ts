@@ -1,5 +1,4 @@
-import { ChatUser } from '../model/chat-user';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LinkParser } from './../model/link-parser';
 import { Post } from '../model/post';
@@ -10,8 +9,6 @@ import { Post } from '../model/post';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent {
-
-  @Input('user') user: ChatUser;
   @Output("addPost") addPost = new EventEmitter<Post>();
 
   linkParser: LinkParser = new LinkParser();

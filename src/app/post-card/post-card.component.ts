@@ -31,14 +31,12 @@ export class PostCardComponent implements OnInit {
   ngOnInit() {}
 
   onImageClick() {
-    this.postClicked.emit(this.message); /// WHY!
+    this.postClicked.emit(this.message);
   }
 
   deleteClicked() {
-    this.postDeleted.emit(this.message); /// WHY!
+    this.postDeleted.emit(this.message);
   }
-
-
 
   get safeLink() {
     if (!this._safeLink) {

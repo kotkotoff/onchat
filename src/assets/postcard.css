@@ -24,8 +24,8 @@ video {
     padding: 5px;
 }
 
-img:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+img:hover, video:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
 
@@ -34,9 +34,8 @@ img:hover {
 }
 
 .valid-input {
-    border-color: lightgreen;
+    border-color: rgb(21, 139, 21);
 }
-
 
 .card {
     width: 18rem;
@@ -51,6 +50,3 @@ img:hover {
     padding: 10px;
 }
 
-.card-footer {
-    height: 20%;
-}

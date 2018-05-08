@@ -19,15 +19,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./top-navbar.component.css']
 })
 export class TopNavbarComponent {
-  @Output('onScrollUp') onScrollUp = new EventEmitter<void>();
+  @Output('brandClicked') brandClicked = new EventEmitter<void>();
 
   constructor(public userService: UserService,
     private authService: AuthService,
     private router: Router) {
   }
 
-  scrollUp() {
-    this.onScrollUp.emit();
+  onBrandClicked() {
+    this.brandClicked.emit();
   }
 
   logout() {

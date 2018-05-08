@@ -1,6 +1,6 @@
+import { UserService } from './../services/user.service';
 import { MessageService } from './../services/message.service';
 import { Component, Input } from '@angular/core';
-import { UserService } from '../services/user.service';
 import { Message } from '../model/message';
 
 @Component({
@@ -9,11 +9,11 @@ import { Message } from '../model/message';
 })
 export class LikesComponent {
 
-  @Input('message') message: Message;
   userId: string;
+  @Input('message') message: Message;
 
-  constructor(userService: UserService, private messageService: MessageService) {
-    this.userId = userService.user? userService.user.id : null; 
+  constructor(private messageService: MessageService, userService: UserService) {
+    this.userId = userService.user.id;
   }
 
   like($event) {

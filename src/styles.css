@@ -1,29 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~bootstrap/dist/css/bootstrap.css";
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,700);
+@import "~roboto-fontface/css/roboto/roboto-fontface.css";
 html,
 body {
     height: 100%;
     background-color: darkgray;
     padding: 0px;
     margin: 0px;
-    font-family: 'Roboto', sans-serif !important;
+    font-family: 'roboto', sans-serif !important;
     font-size: 12pt !important;
 }
 
 .tab-content {
-    height: 200px;
+    height: 196px;
     vertical-align: middle;
 }
 
 .center-image {
     left: 50%;
-    position: absolute;
     top: 50%;
+    position: absolute;
     transform: translate(-50%, -50%);
 }
 
 tab {
     height: 100%;
 }
+
+.logo-img {
+  height:40px;
+}
+
+.button-link {
+  color: whitesmoke;
+  cursor: pointer;
+}
+
+.button-link:hover {
+  color: darkgrey;
+}
+

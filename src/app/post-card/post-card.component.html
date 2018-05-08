@@ -6,15 +6,13 @@
 
         <img class="center-image" [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type!='video'">
         <div *ngIf="message.post.type=='video'" (click)="onImageClick(message)" class="video">
-            <video class="center-image" preload="metadata" controls="">
-          <source [src]="safeLink">
-        </video>
+            <video class="center-image" preload="metadata" controls="" [src]="safeLink"></video>
         </div>
     </tab>
     <tab (select)="onCommentTabSelect()">
         <ng-template tabHeading>
-            <i class="far fa-comments" *ngIf="!message.hasComments"></i>
-            <i class="fas fa-comments" *ngIf="message.hasComments"></i>
+            <span *ngIf="!message.hasComments"><i class="far fa-comments"></i></span>
+            <span *ngIf="message.hasComments"><i class="fas fa-comments" ></i></span>
         </ng-template>
 
         <div class="row messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
@@ -25,14 +23,14 @@
             </ul>
         </div>
         <div class="row message-input">
-            <input [(ngModel)]="newCommentText" type="text" placeholder="Add comment..." class="form-control" (keydown.enter)="addComment()"></div>
+            <input required [(ngModel)]="newCommentText" type="text" placeholder="Add comment..." class="form-control" (keydown.enter)="addComment()"></div>
     </tab>
 </tabset>
 <div class="card-footer align-middle">
     <div class="row text-left">
         <div class="col-3 text-left">
-            <a class="card-link" href="#" *ngIf="userService.user?.isAdmin || message.userId == userService.user?.id" (click)="deleteClicked()">
-                <i class="fas fa-times"></i>
+            <a class="card-link" href="#" *ngIf="message.canEdit(userService.user)" (click)="deleteClicked()">
+              <i class="fas fa-times"></i>
             </a>
         </div>
         <div class="col-6 bottom-line text-center">
