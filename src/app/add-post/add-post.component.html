@@ -1,26 +1,16 @@
 <div class="card-header input-group">
-  <input #p="ngModel" required placeholder="link..." class="form-control card-text" [class.valid-input]="linkText && linkText.length > 0 && p.touched && currentPost.isValid()"
-    [class.invalid-input]="linkText && linkText.length > 0 && p.touched && !currentPost.isValid()" [(ngModel)]="linkText" name="linkText" (keyup.enter)="post()" (input)="onTextChanged()" />
+    <input type="text" [(ngModel)]="linkText" placeholder="link..." class="form-control card-text" (input)="onTextChanged()" (keyup.escape)="clear()" required>
 </div>
 
 <div class="card-img-top">
-  <img [hidden]="!currentPost.isValid()" *ngIf="currentPost.type!='video' && currentPost.imageUrl" [src]="currentPost.imageUrl" (load)="currentPost.imageLoaded()">
-  <div *ngIf="currentPost.type=='video' && currentPost.linkUrl" class="video">
-    <video preload="metadata" controls="" [src]="safeLink"></video>
-  </div>
+    <img *ngIf="currentPost.type!='video' && currentPost.imageUrl" [src]="currentPost.imageUrl" (load)="mediaLoaded()">
+    <div *ngIf="currentPost.type=='video' && currentPost.linkUrl && safeLink" class="video">
+        <video preload="metadata" controls="" [src]="safeLink" (loadeddata)="mediaLoaded()"></video>
+    </div>
 </div>
 
-<div class="card-footer align-middle">
-  <div class="row">
-    <div class="col-6 text-left">
-      <a class="card-link" href="#" *ngIf="p.value" (click)="clear()">
+<div class="card-footer align-middle text-center">
+    <a class="card-link" href="#" *ngIf="linkText" (click)="clear()">
         <i class="far fa-trash-alt"></i>
-      </a>
-    </div>
-    <div class="col-6 text-right">
-      <a *ngIf="currentPost.isValid()" href="#" class="card-link" (click)="post()">
-        <i class="far fa-check-circle"></i>
-      </a>
-    </div>
-  </div>
+    </a>
 </div>

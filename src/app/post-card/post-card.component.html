@@ -4,15 +4,9 @@
             <i class="far fa-image"></i>
         </ng-template>
 
-        <img class="center-image" [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type !='video' && message.post.type !='coub'">
-        <div *ngIf="message.post.type=='video'" (click)="onImageClick(message)"  class="video">
+        <img class="center-image" [src]="message.messageLink.imageUrl" (click)="onImageClick(message)" *ngIf="message.messageLink.type !='video'">
+        <div *ngIf="message.messageLink.type=='video'" (click)="onImageClick(message)" class="video">
             <video class="center-image" preload="metadata" controls="" [src]="safeLink"></video>
-        </div>
-        <div *ngIf="message.post.type=='coub'" class="video" (click)="onImageClick(message)">
-          <iframe [src]="safeLink" frameborder="0" class="video" width="285" height="170" sandbox="allow-scripts"></iframe>
-        </div>
-        <div *ngIf="message.post.type=='coub'" class="video overlay" (click)="onImageClick(message)">
-
         </div>
     </tab>
     <tab (select)="onCommentTabSelect()">
@@ -36,7 +30,7 @@
     <div class="row text-left">
         <div class="col-3 text-left">
             <a class="card-link" href="#" *ngIf="message.canEdit(userService.user)" (click)="deleteClicked()">
-              <i class="fas fa-times"></i>
+                <i class="fas fa-times"></i>
             </a>
         </div>
         <div class="col-6 bottom-line text-center">

@@ -1,20 +1,11 @@
+
 export class Post {
   rawData: string;
-  text: string;
-  imageUrl: string;
-  linkUrl: string;
+  imageUrl: string = null;
+  linkUrl: string = null;
   type: string;
-  linkData: string;
 
   clear() {
-    this.rawData = this.text = this.imageUrl = this.type = this.linkData = this.imageUrl = "";
-  }
-
-  isValid() {
-    return this.type;
-  }
-
-  imageLoaded() {
-    this.type = "image";
+    this.rawData = this.imageUrl = this.type = this.linkUrl = "";
   }
 }

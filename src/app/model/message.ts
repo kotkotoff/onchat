@@ -1,12 +1,13 @@
-import { Post } from "./post";
 import { ChatUser } from "./chat-user";
+import { Post } from "./post";
+import { MessageLink } from "./message-link";
 
 export class Message {
     id: string;
     date: number;
     name: string;
     userId: string;
-    post: Post;
+    messageLink: MessageLink;
     hasComments?: false;
     likes?: string[];
 
@@ -15,14 +16,14 @@ export class Message {
         this.date = m.date;
         this.name = m.name;
         this.userId = m.userId;
-        this.post = m.post;
+        this.messageLink = m.messageLink;
         this.hasComments = m.hasComments;
         this.likes = m.likes;
     }
 
-    static create(userId: string, name: string, post: Post): Message {
+    static create(userId: string, name: string, messageLink: MessageLink): Message {
         const date = new Date().getTime();
-        return new Message('', {userId, name, date, post, hasComments: false, likes: []} );
+        return new Message('', {userId, name, date, messageLink, hasComments: false, likes: []} );
     }
 
     getDate() {

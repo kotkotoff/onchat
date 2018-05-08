@@ -12,6 +12,7 @@ import 'rxjs/add/operator/merge';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { listAnimation } from '../shared/animations';
+import { MessageLink } from '../model/message-link';
 
 @Component({
   animations: [ listAnimation ],
@@ -30,6 +31,12 @@ export class MainComponent implements OnInit, OnDestroy {
   openIndex: number;
   bsModalRef: BsModalRef;
 
+  constructor(
+    public userService: UserService,
+    private messageService: MessageService,
+    private modalService: BsModalService
+  ) {}
+
   ngOnInit(): void {
     this.subscribe();
   }
@@ -41,14 +48,10 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
-
-  constructor(
-    public userService: UserService,
-    private messageService: MessageService,
-    private modalService: BsModalService
-  ) {}
 
   onDeleteClick(m: Message) {
     this.bsModalRef = this.modalService.show(ModalDeleteComponent);
@@ -59,12 +62,13 @@ export class MainComponent implements OnInit, OnDestroy {
     });
   }
 
-  post(post: Post) {
+  post(messageLink: MessageLink) {
+    
     this.messageService.save(
       Message.create(
         this.userService.user.id,
         this.userService.user.displayName,
-        post
+        messageLink
       )
     );
   }

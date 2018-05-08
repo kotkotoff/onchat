@@ -27,15 +27,16 @@ import { UserService } from './services/user.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { LikesComponent } from './likes/likes.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AddPostComponent,
     LoginComponent,
     MainComponent,
     TopNavbarComponent,
     TimeAgoPipe,
-    AddPostComponent,
     OpenPostComponent,
     PostCardComponent,
     ModalDeleteComponent,
@@ -50,6 +51,7 @@ import { LikesComponent } from './likes/likes.component';
     AngularFireDatabaseModule,
     FormsModule,
     InfiniteScrollModule,
+    HttpClientModule,
     ModalModule.forRoot(),
     TabsModule.forRoot(),
     RouterModule.forRoot([

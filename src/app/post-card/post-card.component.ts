@@ -41,7 +41,7 @@ export class PostCardComponent implements OnInit {
   get safeLink() {
     if (!this._safeLink) {
       this._safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(
-        this.message.post.linkUrl
+        this.message.messageLink.linkUrl
       );
     }
     return this._safeLink;

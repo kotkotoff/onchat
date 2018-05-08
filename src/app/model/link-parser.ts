@@ -1,5 +1,6 @@
 import { Post } from "./post";
 import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class LinkParser {
@@ -8,13 +9,14 @@ export class LinkParser {
   static coub = /^(http|https)?:\/\/(www\.)?coub\.com\/view\/([a-zA-Z\d]+)/;
   static directVideo = /^(http|https)?:\/\/(www\.)?([a-zA-Z\.\/_-\d]+)\.(mp4|webm|ogg)/;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   check(post: Post) {
+    post.type = null;
     const match = post.rawData.match(LinkParser.urlRegex);
     if (match && match[1]) {
+      post.type = "image";
       post.imageUrl = match[1];
-      post.text = post.rawData.replace(LinkParser.urlRegex, "");
       if (this.checkYoutube(post) || this.checkDirectVideo(post) || this.checkCoub(post)) {
         return;
       }
@@ -36,8 +38,10 @@ export class LinkParser {
     const match = post.imageUrl.match(LinkParser.coub);
     if (match && match[3] && match[3].length === 6) {
       post.type = "coub";
-      post.linkUrl = `https://coub.com/embed/${match[3]}?hideTopBar=true&startWithHD=false`;
-      //post.imageUrl = "assets/coub-logo.png";
+      post.linkUrl = `https://coub.com/embed/${match[3]}?autoplay=true`;
+      this.http.get<any>(`http://iframe.ly/api/iframely?url=http://coub.com/view/${match[3]}&api_key=792115ede4cc4184e6a1c3`).take(1).subscribe(r => {
+        post.imageUrl = r.links.thumbnail[0].href;
+      });
       return true;
     }
     return false;
