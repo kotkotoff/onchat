@@ -2,18 +2,9 @@ import { AuthService } from './../services/auth.service';
 import { UserService } from './../services/user.service';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { trigger, style, animate, transition } from '@angular/animations';
 import { Router } from '@angular/router';
 
 @Component({
-  animations: [
-    trigger('slideDown', [
-      transition('void <=> *', [
-        style([{ transform: 'translateY(-100%)' }]),
-        animate('1s ease-in', style({ transform: 'translateY(0)' }))
-      ])
-    ])
-  ],
   selector: 'top-navbar',
   templateUrl: './top-navbar.component.html',
   styleUrls: ['./top-navbar.component.css']

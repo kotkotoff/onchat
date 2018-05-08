@@ -1,4 +1,3 @@
-import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Message } from '../model/message';
 import { MessageService } from '../services/message.service';
@@ -12,40 +11,10 @@ import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/merge';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { listAnimation } from '../shared/animations';
 
 @Component({
-  animations: [
-    trigger("listAnimation", [
-      transition("* => *", [
-        query(
-          ":enter",
-          [
-            style({ opacity: 0, transform: "scale(0) translateY(-100%)" }),
-            stagger(100, [
-              animate(
-                "0.25s",
-                style({ opacity: 1, transform: "scale(1) translateY(0)" })
-              )
-            ])
-          ],
-          { optional: true }
-        ),
-        query(
-          ":leave",
-          [
-            style({ opacity: 1, transform: "scale(1) rotate(0deg)" }),
-            stagger(100, [
-              animate(
-                "0.25s",
-                style({ opacity: 0, transform: "scale(0) rotate(360deg)" })
-              )
-            ])
-          ],
-          { optional: true }
-        )
-      ])
-    ])
-  ],
+  animations: [ listAnimation ],
   selector: "main",
   templateUrl: "./main.component.html",
   styleUrls: ["./main.component.css"]

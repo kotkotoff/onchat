@@ -4,9 +4,15 @@
             <i class="far fa-image"></i>
         </ng-template>
 
-        <img class="center-image" [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type!='video'">
-        <div *ngIf="message.post.type=='video'" (click)="onImageClick(message)" class="video">
+        <img class="center-image" [src]="message.post.imageUrl" (click)="onImageClick(message)" *ngIf="message.post.type !='video' && message.post.type !='coub'">
+        <div *ngIf="message.post.type=='video'" (click)="onImageClick(message)"  class="video">
             <video class="center-image" preload="metadata" controls="" [src]="safeLink"></video>
+        </div>
+        <div *ngIf="message.post.type=='coub'" class="video" (click)="onImageClick(message)">
+          <iframe [src]="safeLink" frameborder="0" class="video" width="285" height="170" sandbox="allow-scripts"></iframe>
+        </div>
+        <div *ngIf="message.post.type=='coub'" class="video overlay" (click)="onImageClick(message)">
+
         </div>
     </tab>
     <tab (select)="onCommentTabSelect()">

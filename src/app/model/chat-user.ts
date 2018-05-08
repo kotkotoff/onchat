@@ -1,3 +1,5 @@
+import { User } from "firebase";
+
 export class ChatUser {
   email: string;
   displayName: string;
@@ -11,5 +13,22 @@ export class ChatUser {
     this.isAdmin = user.isAdmin;
     this.lastVisitDate = user.lastVisitDate;
     this.postCount = user.postCount;
+  }
+
+  static create(user: User): ChatUser {
+    return new ChatUser(user.uid,
+      {
+        email: user.email,
+        displayName: user.displayName,
+        isAdmin: false,
+        postCount: 0,
+        lastVisitDate: new Date().getTime()
+      });
+  }
+
+  updateFrom(user: User) {
+    this.displayName = user.displayName;
+    this.email = user.email;
+    this.lastVisitDate = new Date().getTime();
   }
 }

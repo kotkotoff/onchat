@@ -1,10 +1,14 @@
 import { Post } from "./post";
+import { Injectable } from "@angular/core";
 
+@Injectable()
 export class LinkParser {
   static urlRegex = /(https?:\/\/[^ ]*)/;
   static youtube = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
   static coub = /^(http|https)?:\/\/(www\.)?coub\.com\/view\/([a-zA-Z\d]+)/;
   static directVideo = /^(http|https)?:\/\/(www\.)?([a-zA-Z\.\/_-\d]+)\.(mp4|webm|ogg)/;
+
+  constructor() {}
 
   check(post: Post) {
     const match = post.rawData.match(LinkParser.urlRegex);
@@ -32,8 +36,8 @@ export class LinkParser {
     const match = post.imageUrl.match(LinkParser.coub);
     if (match && match[3] && match[3].length === 6) {
       post.type = "coub";
-      post.linkUrl = `https://coub.com/embed/${match[3]}`;
-      post.imageUrl = "assets/coub-logo.png";
+      post.linkUrl = `https://coub.com/embed/${match[3]}?hideTopBar=true&startWithHD=false`;
+      //post.imageUrl = "assets/coub-logo.png";
       return true;
     }
     return false;
@@ -49,3 +53,4 @@ export class LinkParser {
     return false;
   }
 }
+

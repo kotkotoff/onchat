@@ -16,28 +16,15 @@ export class UserService {
   createOrUpdate(user: firebase.User) {
     let newUser: ChatUser;
     this.getUser(user.uid).take(1).subscribe(chatUser => {
-      if (chatUser && chatUser.id == user.uid) {
+      if (chatUser && chatUser.id === user.uid) {
+        chatUser.updateFrom(user);
         newUser = chatUser;
-        newUser.displayName = user.displayName;
-        newUser.email = user.email;
-        newUser.lastVisitDate = new Date().getTime();
       } else {
-        newUser = new ChatUser(user.uid,
-          {
-            email: user.email,
-            displayName: user.displayName,
-            isAdmin: false,
-            postCount: 0,
-            lastVisitDate: new Date().getTime()
-          });
+        newUser = ChatUser.create(user);
       }
       this.db.object(this._dbPath + user.uid).update(newUser);
       this.user = newUser;
     });
-  }
-
-  login() {
-
   }
 
   logout() {

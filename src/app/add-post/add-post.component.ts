@@ -11,12 +11,11 @@ import { Post } from '../model/post';
 export class AddPostComponent {
   @Output("addPost") addPost = new EventEmitter<Post>();
 
-  linkParser: LinkParser = new LinkParser();
   linkText: string;
   currentPost: Post;
   _safeLink: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private linkParser: LinkParser) {
     this.currentPost = new Post();
   }
 

@@ -28,3 +28,11 @@
 ul {
   list-style-type: none;
 }
+
+.overlay {
+  z-index: 9999;
+  position: absolute;
+  height: 60%;
+  top: 15%;
+  width: 100%;
+}
