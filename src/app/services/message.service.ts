@@ -28,4 +28,22 @@ export class MessageService {
       this.commentService.delete(message.id);
     }
   }
+
+  updateHasComments(m: Message) {
+    if (!m.hasComments) {
+      this.db.object(this._dbPath + m.id).update( { hasComments: true });
+    }
+  }
+
+  updateLikes(m: Message) {
+    const userId = this.userService.user.id;
+    if (!m.likes) { m.likes = []; }
+    const index = m.likes.indexOf(userId);
+    if (index > -1) {
+      m.likes.splice(index, 1);
+    } else {
+      m.likes.push(userId);
+    }
+    this.db.object(this._dbPath + m.id).update( { likes: m.likes });
+  }
 }

@@ -40,9 +40,7 @@
             <small>{{ message.getDate() | timeAgo }}</small>
         </div>
         <div class="col-3 text-right">
-            <a class="card-link" href="#" *ngIf="userService.user?.isAdmin || message.userId == userService.user?.id" (click)="deleteClicked()">
-                <i class="far fa-heart"></i>
-            </a>
+            <likes [message]="message"></likes>
         </div>
     </div>
 </div>

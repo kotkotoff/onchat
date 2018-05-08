@@ -16,13 +16,20 @@
             <i class="fas fa-caret-left"></i>
           </a>
         </div>
-        <span class="p-2 bottom-text">By {{message.name}} at {{ message.getDate() | date}}</span>
-        <div class="p-2" style="font-size:4em;">
-            <a (click)="goRight($event)">
-                <i class="fas fa-caret-right"></i>
-            </a>
-        </div>
+        <div class="row bottom-text" style="font-size:2em; width:500px;">
+            <div class="col-9">
+            {{message.name}} at {{ message.getDate() | date}}</div> <div class="col-3"><likes [message]="message"></likes></div></div>
+
+    <div class="p-2" style="font-size:4em;">
+        <a (click)="goRight($event)">
+            <i class="fas fa-caret-right"></i>
+        </a>
     </div>
-    </span>
+    <div class="p-2" style="font-size:3em;">
+
+    </div>
+
 </div>
+</span>
+    </div>
 </div>

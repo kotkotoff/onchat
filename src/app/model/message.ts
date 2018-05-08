@@ -7,6 +7,7 @@ export class Message {
     userId: string;
     post: Post;
     hasComments?: false;
+    likes?: string[]
 
     constructor(id: string, m: Partial<Message>) {
         this.id = id;
@@ -15,11 +16,12 @@ export class Message {
         this.userId = m.userId;
         this.post = m.post;
         this.hasComments = m.hasComments;
+        this.likes = m.likes;
     }
 
     static create(userId: string, name: string, post: Post): Message {
         const date = new Date().getTime();
-        return new Message('', {userId, name, date, post, hasComments: false} );
+        return new Message('', {userId, name, date, post, hasComments: false, likes: []} );
     }
 
     getDate() {
@@ -28,6 +30,10 @@ export class Message {
 
     belongsTo(userId: string): boolean  {
         return this.userId === userId;
+    }
+
+    isLiked(userId) : boolean {
+        return this.likes && this.likes.indexOf(userId) > -1;
     }
 }
 

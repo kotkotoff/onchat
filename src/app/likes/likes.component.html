@@ -1,0 +1,5 @@
+<a class="card-link" href="#" (click)="like($event)">
+    <span *ngIf="message.likes && message.likes.length > 0">+{{message.likes.length}}</span>
+    <i class="far fa-heart" *ngIf="!message.isLiked(userId)"></i>
+    <i class="fas fa-heart" *ngIf="message.isLiked(userId)"></i>
+</a>

@@ -31,12 +31,14 @@ export class PostCardComponent implements OnInit {
   ngOnInit() {}
 
   onImageClick() {
-    this.postClicked.emit(this.message);
+    this.postClicked.emit(this.message); /// WHY!
   }
 
   deleteClicked() {
-    this.postDeleted.emit(this.message);
+    this.postDeleted.emit(this.message); /// WHY!
   }
+
+
 
   get safeLink() {
     if (!this._safeLink) {
@@ -46,7 +48,6 @@ export class PostCardComponent implements OnInit {
     }
     return this._safeLink;
   }
-
 
   onCommentTabSelect() {
     if (!this.comments) {
@@ -58,6 +59,7 @@ export class PostCardComponent implements OnInit {
     if (this.newCommentText && this.newCommentText.length < 500) {
       const comment = new Comment({date: new Date().getTime(), userName: this.userService.user.displayName, comment: this.newCommentText});
       this.commentService.save(this.message.id, comment);
+      this.messageService.updateHasComments(this.message);
       this.newCommentText = "";
     }
   }
