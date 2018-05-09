@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { CommentService } from "./../services/comment.service";
-import { Component, OnInit, Input, EventEmitter, Output } from "@angular/core";
+import { Component, Input, EventEmitter, Output } from "@angular/core";
 import { Message } from "../model/message";
 import { MessageService } from "../services/message.service";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
@@ -12,7 +12,7 @@ import { Comments, Comment } from '../model/comments';
   templateUrl: "./post-card.component.html",
   styleUrls: ["./post-card.component.css"]
 })
-export class PostCardComponent implements OnInit {
+export class PostCardComponent {
   @Input("message") message: Message;
   @Output("postClicked") postClicked = new EventEmitter<Message>();
   @Output("postDeleted") postDeleted = new EventEmitter<Message>();
@@ -27,8 +27,6 @@ export class PostCardComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private commentService: CommentService
   ) {}
-
-  ngOnInit() {}
 
   onImageClick() {
     this.postClicked.emit(this.message);

@@ -27,8 +27,7 @@ export class MainComponent implements OnInit, OnDestroy {
   messages: Message[] = [];
   topN: number = MainComponent.START_COUNT;
 
-  openMessage$ = new Subject<Message>();
-  openIndex: number;
+  openMessage$ = new Subject<[Message, number]>();
   bsModalRef: BsModalRef;
 
   constructor(
@@ -77,8 +76,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   onImageClick(m: Message) {
-    this.openMessage$.next(m);
-    this.openIndex = this.messages.indexOf(m);
+    this.openMessage$.next([m, this.messages.indexOf(m)]);
   }
 
   showMore() {

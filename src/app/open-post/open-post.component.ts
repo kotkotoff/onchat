@@ -12,14 +12,13 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./open-post.component.css']
 })
 export class OpenPostComponent implements OnInit, OnDestroy {
-  @Input('message') messageSubject: Subject<Message>;
-  @Input('messageIndex') messageIndex: number;
-
+  @Input('message') messageSubject: Subject<[Message, number]>;
+  messageIndex: number;
   subscription: Subscription;
   messages: Message[];
   takeTopN: number;
   prevMessageCount = 0;
-  hasMoreMessages = false;
+  hasMoreMessages = true;
 
   message: Message;
   safeLink: SafeResourceUrl;
@@ -29,7 +28,9 @@ export class OpenPostComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription = this.messageSubject.subscribe(m => {
+    this.subscription = this.messageSubject.subscribe(tuple => {
+      const m = tuple[0];
+      this.messageIndex = tuple[1];
       if (m && this.message !== m) {
         this.message = m;
         this.safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.message.messageLink.linkUrl);
@@ -45,11 +46,10 @@ export class OpenPostComponent implements OnInit, OnDestroy {
   }
 
  close() {
-    this.message = null;
-    this.opened = this.hasMoreMessages = false;
-    this.safeLink = null;
-    this.messages = null;
-    this.messageIndex = this.takeTopN = 0;
+    this.message = this.safeLink = this.messages = null;
+    this.opened = false;
+    this.hasMoreMessages = true;
+    this.messageIndex = this.takeTopN = this.prevMessageCount = 0;
  }
 
  goLeft($event) {
@@ -63,12 +63,11 @@ export class OpenPostComponent implements OnInit, OnDestroy {
  }
 
  retrieve(isRight: boolean) {
-    this.takeTopN = this.messageIndex + 10;
+    this.takeTopN = isRight ? this.messageIndex + 10 : this.messageIndex;
     this.prevMessageCount = this.messages ? this.messages.length : 0;
     this.messageService.list(this.takeTopN).take(1).subscribe(messages => {
-      this.hasMoreMessages = messages.length > this.prevMessageCount;
-
-      if (this.hasMoreMessages) {
+      this.hasMoreMessages = messages.length - 1 > this.messageIndex;
+      if (this.hasMoreMessages || !isRight) {
         this.messages = messages;
         this.getNextMessage(isRight);
       }
@@ -91,11 +90,13 @@ export class OpenPostComponent implements OnInit, OnDestroy {
     } else if (!isRight && this.messageIndex > 0) {
       this.messageIndex--;
       foundMessage = this.messages[this.messageIndex];
+      this.hasMoreMessages = true;
     }
+
     if (foundMessage) {
       this.message = null;
       this.safeLink = null;
-      this.messageSubject.next(foundMessage);
+      this.messageSubject.next([foundMessage, this.messageIndex]);
     }
   }
 
