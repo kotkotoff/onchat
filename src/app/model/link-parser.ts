@@ -9,6 +9,7 @@ export class LinkParser {
   static youtube = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=|\?v=)([^#\&\?]*).*/;
   static coub = /^(http|https)?:\/\/(www\.)?coub\.com\/view\/([a-zA-Z\d]+)/;
   static directVideo = /^(http|https)?:\/\/(www\.)?([a-zA-Z\.\/_-\d]+)\.(mp4|webm|ogg)/;
+  static vimeo = /^(http|https)?:\/\/(www\.)?([a-zA-Z\.]+)?vimeo\.com([a-zA-Z\.\/]+)\/([a-zA-Z\d]+)/;
 
   constructor(private http: HttpClient) {}
 
@@ -18,7 +19,7 @@ export class LinkParser {
     if (match && match[1]) {
       post.type = MediaType.Image;
       post.imageUrl = match[1];
-      if (this.checkYoutube(post) || this.checkDirectVideo(post) || this.checkCoub(post)) {
+      if (this.checkYoutube(post) || this.checkDirectVideo(post) || this.checkCoub(post) || this.checkVimeo(post)) {
         return;
       }
     }
@@ -55,6 +56,20 @@ export class LinkParser {
       post.type = MediaType.Video;
       post.linkUrl = match[0];
       post.imageUrl = null;
+      return true;
+    }
+    return false;
+  }
+
+  private checkVimeo(post: Post): boolean {
+    const match = post.imageUrl.match(LinkParser.vimeo);
+    if (match && match[5] && match[5].length === 8) {
+      post.type = MediaType.Vimeo;
+      post.linkUrl = `https://player.vimeo.com/video/${match[5]}?autoplay=true`;
+      this.http.get<any>(`https://vimeo.com/api/oembed.json?url=http%3A%2F%2Fvimeo.com%2F${match[5]}`)
+      .take(1).subscribe(r => {
+        post.imageUrl = r.thumbnail_url;
+      });
       return true;
     }
     return false;

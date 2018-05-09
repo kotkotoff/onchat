@@ -3,5 +3,6 @@ export enum MediaType {
   Image = 1,
   Youtube = 2,
   Coub = 3,
-  Video = 4
+  Video = 4,
+  Vimeo = 5
 }
