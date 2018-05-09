@@ -14,12 +14,7 @@ export class AppComponent {
   title = 'Share!';
   xxx: string;
 
-  constructor(authService: AuthService, router: Router, userService: UserService, http: HttpClient) {
-
-    http.get<any>('https://vimeo.com/api/oembed.json?url=http%3A%2F%2Fvimeo.com%2F76979871').subscribe(
-      x => {
-      console.log(x) }
-    );
+  constructor(authService: AuthService, router: Router, userService: UserService) {
 
     authService.user$.subscribe(user => {
       if (!user) {

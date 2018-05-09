@@ -10,8 +10,9 @@ export class LinkParser {
   static coub = /^(http|https)?:\/\/(www\.)?coub\.com\/view\/([a-zA-Z\d]+)/;
   static directVideo = /^(http|https)?:\/\/(www\.)?([a-zA-Z\.\/_-\d]+)\.(mp4|webm|ogg)/;
   static vimeo = /^(http|https)?:\/\/(www\.)?([a-zA-Z\.]+)?vimeo\.com([a-zA-Z\.\/]+)\/([a-zA-Z\d]+)/;
+  static facebook = /^(http|https)?:\/\/(www\.)?facebook\.com([a-zA-Z\.\/]+)\/([a-zA-Z\d]+)/;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   check(post: Post) {
     post.type = null;
@@ -19,7 +20,11 @@ export class LinkParser {
     if (match && match[1]) {
       post.type = MediaType.Image;
       post.imageUrl = match[1];
-      if (this.checkYoutube(post) || this.checkDirectVideo(post) || this.checkCoub(post) || this.checkVimeo(post)) {
+      if (this.checkYoutube(post) ||
+      this.checkDirectVideo(post) ||
+      this.checkCoub(post) ||
+      this.checkVimeo(post) ||
+      this.checkFacebook(post)) {
         return;
       }
     }
@@ -36,15 +41,26 @@ export class LinkParser {
     return false;
   }
 
+  private checkFacebook(post: Post): boolean {
+    const match = post.imageUrl.match(LinkParser.facebook);
+    if (match && match[4] && match[4].length === 16) {
+      post.type = MediaType.Facebook;
+      post.linkUrl = `https://www.facebook.com/plugins/video.php?href=${post.imageUrl}&autoplay=true`;
+      post.imageUrl = './assets/fb.jpg';
+      return true;
+    }
+    return false;
+  }
+
   private checkCoub(post: Post): boolean {
     const match = post.imageUrl.match(LinkParser.coub);
     if (match && match[3] && match[3].length === 6) {
       post.type = MediaType.Coub;
       post.linkUrl = `https://coub.com/embed/${match[3]}?autoplay=true`;
       this.http.get<any>(`http://iframe.ly/api/iframely?url=http://coub.com/view/${match[3]}&api_key=792115ede4cc4184e6a1c3`)
-      .take(1).subscribe(r => {
-        post.imageUrl = r.links.thumbnail[0].href;
-      });
+        .take(1).subscribe(r => {
+          post.imageUrl = r.links.thumbnail[0].href;
+        });
       return true;
     }
     return false;
@@ -63,13 +79,13 @@ export class LinkParser {
 
   private checkVimeo(post: Post): boolean {
     const match = post.imageUrl.match(LinkParser.vimeo);
-    if (match && match[5] && match[5].length === 8) {
+    if (match && match[5] && match[5].length > 5) {
       post.type = MediaType.Vimeo;
       post.linkUrl = `https://player.vimeo.com/video/${match[5]}?autoplay=true`;
       this.http.get<any>(`https://vimeo.com/api/oembed.json?url=http%3A%2F%2Fvimeo.com%2F${match[5]}`)
-      .take(1).subscribe(r => {
-        post.imageUrl = r.thumbnail_url;
-      });
+        .take(1).subscribe(r => {
+          post.imageUrl = r.thumbnail_url;
+        });
       return true;
     }
     return false;

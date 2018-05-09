@@ -2,7 +2,7 @@
   <div class="ng-gallery-content" *ngIf="message">
     <a href="#" id="hiddenFocus" (keydown.arrowleft)="goLeft($event)" (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#hiddenFocus"></a>
     <img *ngIf="message.messageLink.type == 1" [src]="message.messageLink.imageUrl" class="effect image" />
-    <div *ngIf="message.messageLink.type == 2 || message.messageLink.type == 3 || message.messageLink.type == 5" class="ng-gallery-content">
+    <div *ngIf="message.messageLink.type == 2 || message.messageLink.type == 3 || message.messageLink.type == 5 || message.messageLink.type == 6" class="ng-gallery-content">
       <iframe [src]="safeLink" allowtransparency allow="autoplay" width="800" height="480" class="video" (click)="blockPropagation($event)"></iframe>
     </div>
     <div *ngIf="message.messageLink.type == 4" class="ng-gallery-content">
