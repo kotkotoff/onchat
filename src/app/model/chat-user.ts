@@ -5,7 +5,7 @@ export class ChatUser {
   displayName: string;
   isAdmin: boolean;
   lastVisitDate: number;
-  postCount: number;
+  postCount?: number = null;
 
   constructor(public id: string, user: Partial<ChatUser>) {
     this.email = user.email;

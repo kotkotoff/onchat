@@ -12,6 +12,4 @@ export class Post extends MessageLink {
     this.rawData = this.imageUrl = this.linkUrl = "";
     this.type = MediaType.None;
   }
-
-
 }
