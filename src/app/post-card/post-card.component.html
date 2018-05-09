@@ -4,15 +4,15 @@
             <i class="far fa-image"></i>
         </ng-template>
 
-        <img class="center-image" [src]="message.messageLink.imageUrl" (click)="onImageClick(message)" *ngIf="message.messageLink.type !='video'">
-        <div *ngIf="message.messageLink.type=='video'" (click)="onImageClick(message)" class="video">
+        <img class="center-image" [src]="message.messageLink.imageUrl" (click)="onImageClick(message)" *ngIf="message.messageLink.type != 4">
+        <div *ngIf="message.messageLink.type == 4" (click)="onImageClick(message)" class="video">
             <video class="center-image" preload="metadata" controls="" [src]="safeLink"></video>
         </div>
     </tab>
     <tab (select)="onCommentTabSelect()">
         <ng-template tabHeading>
-            <span *ngIf="!message.hasComments"><i class="far fa-comments"></i></span>
-            <span *ngIf="message.hasComments"><i class="fas fa-comments" ></i></span>
+            <span *ngIf="!message.commentCount"><i class="far fa-comments"></i></span>
+            <span *ngIf="message.commentCount > 0">{{message.commentCount}} <i class="fas fa-comments" ></i></span>
         </ng-template>
 
         <div class="row messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">

@@ -1,6 +1,7 @@
+import { MediaType } from "./media-type";
 
 export class MessageLink {
-    type: string;
+    type: MediaType;
     imageUrl?: string;
     linkUrl?: string;
 

@@ -63,7 +63,6 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   post(messageLink: MessageLink) {
-    
     this.messageService.save(
       Message.create(
         this.userService.user.id,

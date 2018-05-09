@@ -35,9 +35,10 @@ export class MessageService {
   }
 
   updateHasComments(m: Message) {
-    if (!m.hasComments) {
-      this.db.object(this._dbPath + m.id).update({ hasComments: true });
+    if (!m.commentCount) {
+      m.commentCount = 0;
     }
+    this.db.object(this._dbPath + m.id).update({ commentCount: m.commentCount + 1 });
   }
 
   updateLikes(m: Message) {

@@ -1,11 +1,17 @@
+import { MessageLink } from './message-link';
+import { MediaType } from "./media-type";
 
-export class Post {
+export class Post extends MessageLink {
   rawData: string;
-  imageUrl: string = null;
-  linkUrl: string = null;
-  type: string;
+
+  constructor() {
+    super({type: MediaType.None});
+  }
 
   clear() {
-    this.rawData = this.imageUrl = this.type = this.linkUrl = "";
+    this.rawData = this.imageUrl = this.linkUrl = "";
+    this.type = MediaType.None;
   }
+
+
 }

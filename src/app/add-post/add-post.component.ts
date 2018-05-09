@@ -10,10 +10,11 @@ import { Post } from '../model/post';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent {
-  @Output('addPost') addPost = new EventEmitter<MessageLink>();
 
-  linkText: string= "";;
-  currentPost: Post= new Post();
+  @Output('addPost') addPost = new EventEmitter<MessageLink>();
+  isError: boolean;
+  linkText: string = "";
+  currentPost: Post = new Post();
   private _safeLink: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer, private linkParser: LinkParser) {  }
@@ -36,6 +37,11 @@ export class AddPostComponent {
     this.currentPost.clear();
     this.linkText = "";
     this._safeLink = null;
+    this.isError = false;
+  }
+
+  mediaError() {
+    this.isError = true;
   }
 
   mediaLoaded() {

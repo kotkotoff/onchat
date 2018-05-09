@@ -31,7 +31,6 @@ export class OpenPostComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.messageSubject.subscribe(m => {
       if (m && this.message !== m) {
-        console.log(m)
         this.message = m;
         this.safeLink = this.sanitizer.bypassSecurityTrustResourceUrl(this.message.messageLink.linkUrl);
         this.opened = true;

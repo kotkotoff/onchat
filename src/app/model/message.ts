@@ -1,5 +1,4 @@
 import { ChatUser } from "./chat-user";
-import { Post } from "./post";
 import { MessageLink } from "./message-link";
 
 export class Message {
@@ -8,7 +7,7 @@ export class Message {
     name: string;
     userId: string;
     messageLink: MessageLink;
-    hasComments?: false;
+    commentCount?: number;
     likes?: string[];
 
     constructor(id: string, m: Partial<Message>) {
@@ -17,13 +16,13 @@ export class Message {
         this.name = m.name;
         this.userId = m.userId;
         this.messageLink = m.messageLink;
-        this.hasComments = m.hasComments;
+        this.commentCount = m.commentCount;
         this.likes = m.likes;
     }
 
     static create(userId: string, name: string, messageLink: MessageLink): Message {
         const date = new Date().getTime();
-        return new Message('', {userId, name, date, messageLink, hasComments: false, likes: []} );
+        return new Message('', {userId, name, date, messageLink, commentCount: 0, likes: []} );
     }
 
     getDate() {

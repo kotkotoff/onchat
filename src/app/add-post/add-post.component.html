@@ -1,11 +1,14 @@
 <div class="card-header input-group">
-    <input type="text" [(ngModel)]="linkText" placeholder="link..." class="form-control card-text" (input)="onTextChanged()" (keyup.escape)="clear()" required>
+    <input type="text" #ltext [(ngModel)]="linkText" placeholder="link..."
+
+    [class.invalid-input]="linkText && linkText.length > 0 && (isError || !safeLink)"
+    class="form-control card-text" (input)="onTextChanged()" (keyup.escape)="clear()" required>
 </div>
 
 <div class="card-img-top">
-    <img *ngIf="currentPost.type!='video' && currentPost.imageUrl" [src]="currentPost.imageUrl" (load)="mediaLoaded()">
-    <div *ngIf="currentPost.type=='video' && currentPost.linkUrl && safeLink" class="video">
-        <video preload="metadata" controls="" [src]="safeLink" (loadeddata)="mediaLoaded()"></video>
+    <img *ngIf="currentPost.type != 4 && currentPost.imageUrl" [src]="currentPost.imageUrl" (load)="mediaLoaded()" (error)="mediaError()">
+    <div *ngIf="currentPost.type == 4 && currentPost.linkUrl && safeLink" class="video">
+        <video preload="metadata" controls="" [src]="safeLink" (loadeddata)="mediaLoaded()" (error)="mediaError()"></video>
     </div>
 </div>
 
