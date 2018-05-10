@@ -16,7 +16,7 @@ export class AddPostComponent {
   isError: boolean;
   linkText: string = "";
   currentPost: Post = new Post();
-  disabled: boolean = true;
+  disabled: boolean = false;
   private _safeLink: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer, private linkParser: LinkParser,
@@ -52,8 +52,8 @@ export class AddPostComponent {
     this.messageService.save(messageLink).subscribe(result => {
       if (result) {
         this.clear();
-        this.disabled = false;
-        setTimeout(() => this.disabled = true, 3000);
+        this.disabled = true;
+        setTimeout(() => this.disabled = false, 3000);
       } else {
         this.popover.show();
       }
