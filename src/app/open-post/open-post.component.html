@@ -20,8 +20,7 @@
           <div class="col-9">
             <span class="name-text">{{message.name}}</span>&nbsp;
             <span class="date-text">{{ message.getDate() | date}}</span></div>
-          <div class="col-3" style="font-size:2em;">
-            <likes [message]="message"></likes>
+          <div class="col-3" style="font-size:2em;" likes [message]="message">
           </div>
         </div>
 

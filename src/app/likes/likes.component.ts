@@ -4,7 +4,7 @@ import { Component, Input } from '@angular/core';
 import { Message } from '../model/message';
 
 @Component({
-  selector: 'likes',
+  selector: '[likes]',
   templateUrl: './likes.component.html'
 })
 export class LikesComponent {

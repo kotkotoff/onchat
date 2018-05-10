@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'top-navbar',
+  selector: '[top-navbar]',
   templateUrl: './top-navbar.component.html',
   styleUrls: ['./top-navbar.component.css']
 })

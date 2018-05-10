@@ -44,8 +44,8 @@
         <br>
         <small>{{ message.getDate() | timeAgo }}</small>
       </div>
-      <div class="col-3 text-right">
-        <likes [message]="message"></likes>
+      <div class="col-3 text-right" likes [message]="message">
+        <!-- <likes [message]="message"></likes> -->
       </div>
     </div>
   </div>
