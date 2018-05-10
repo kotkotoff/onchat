@@ -12,6 +12,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./open-post.component.css']
 })
 export class OpenPostComponent implements OnInit, OnDestroy {
+
   @Input('message') messageSubject: Subject<[Message, number]>;
   messageIndex: number;
   subscription: Subscription;

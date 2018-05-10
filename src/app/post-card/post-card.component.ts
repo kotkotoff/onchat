@@ -1,11 +1,12 @@
 import { Observable } from 'rxjs/Observable';
 import { CommentService } from "./../services/comment.service";
-import { Component, Input, EventEmitter, Output } from "@angular/core";
+import { Component, Input, EventEmitter, Output, ViewChild, TemplateRef } from "@angular/core";
 import { Message } from "../model/message";
 import { MessageService } from "../services/message.service";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { UserService } from "../services/user.service";
 import { Comments, Comment } from '../model/comments';
+import { MediaType } from '../model/media-type';
 
 @Component({
   selector: "post-card",
@@ -16,6 +17,9 @@ export class PostCardComponent {
   @Input("message") message: Message;
   @Output("postClicked") postClicked = new EventEmitter<Message>();
   @Output("postDeleted") postDeleted = new EventEmitter<Message>();
+
+  @ViewChild("linkImage") linkImage: TemplateRef<any>;
+  @ViewChild("linkVideo") linkVideo: TemplateRef<any>;
 
   _safeLink: SafeResourceUrl;
   comments: Observable<Comments>;
@@ -58,5 +62,12 @@ export class PostCardComponent {
       this.messageService.updateHasComments(this.message);
       this.newCommentText = "";
     }
+  }
+
+  getPreview(type: MediaType): TemplateRef<any> {
+    if (type === MediaType.Video) {
+      return this.linkVideo;
+    }
+    return this.linkImage;
   }
 }

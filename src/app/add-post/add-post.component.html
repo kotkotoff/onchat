@@ -1,9 +1,9 @@
-<div class="card border-secondary" *ngIf="visible">
+<div class="card border-secondary" >
   <div class="card-header input-group">
     <input type="text" #ltext [(ngModel)]="linkText" placeholder="link..." [class.invalid-input]="linkText && linkText.length > 0 && (isError || !safeLink)"
     class="form-control card-text" (input)="onTextChanged()" (keyup.escape)="clear()" required
     popover="This link has already been posted!" triggers="" #pop="bs-popover"
-    placement="bottom" [outsideClick]="true">
+    placement="bottom" [outsideClick]="true" [disabled]="disabled">
   </div>
   <div class="card-img-top">
     <img *ngIf="currentPost.type != 4 && currentPost.imageUrl" [src]="currentPost.imageUrl" (load)="mediaLoaded()" (error)="mediaError()">

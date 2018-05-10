@@ -4,11 +4,15 @@
       <ng-template tabHeading>
         <i class="far fa-image"></i>
       </ng-template>
-
-      <img class="center-image" [src]="message.messageLink.imageUrl" (click)="onImageClick(message)" *ngIf="message.messageLink.type != 4">
-      <div *ngIf="message.messageLink.type == 4" (click)="onImageClick(message)" class="video">
-        <video class="center-image" preload="metadata" controls="" [src]="safeLink"></video>
-      </div>
+      <ng-template #linkImage>
+        <img class="center-image" [src]="message.messageLink.imageUrl" (click)="onImageClick(message)">
+      </ng-template>
+      <ng-template #linkVideo>
+        <div (click)="onImageClick(message)" class="video">
+          <video class="center-image" preload="metadata" controls="" [src]="safeLink"></video>
+        </div>
+      </ng-template>
+      <ng-container *ngTemplateOutlet="getPreview(message.messageLink.type)"></ng-container>
     </tab>
     <tab (select)="onCommentTabSelect()">
       <ng-template tabHeading>
@@ -45,7 +49,6 @@
         <small>{{ message.getDate() | timeAgo }}</small>
       </div>
       <div class="col-3 text-right" likes [message]="message">
-        <!-- <likes [message]="message"></likes> -->
       </div>
     </div>
   </div>

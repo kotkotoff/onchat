@@ -1,14 +1,19 @@
 <div class="ng-overlay" *ngIf="opened" (click)="close()" (keyup.escape)="close()">
   <div class="ng-gallery-content" *ngIf="message">
     <a href="#" id="hiddenFocus" (keydown.arrowleft)="goLeft($event)" (keydown.arrowright)="goRight($event)" focusDirective cssSelector="#hiddenFocus"></a>
-    <img *ngIf="message.messageLink.type == 1" [src]="message.messageLink.imageUrl" class="effect image" />
-    <div *ngIf="message.messageLink.type == 2 || message.messageLink.type == 3 || message.messageLink.type == 5 || message.messageLink.type == 6" class="ng-gallery-content">
-      <iframe [src]="safeLink" allowtransparency allow="autoplay" width="800" height="480" class="video" (click)="blockPropagation($event)"></iframe>
-    </div>
-    <div *ngIf="message.messageLink.type == 4" class="ng-gallery-content">
-      <video preload="none" #videoPlayer autoplay="true" controls="" class="video" [src]="safeLink" (click)="blockPropagation($event)">
-      </video>
-    </div>
+
+    <ng-container [ngSwitch]="message.messageLink.type">
+        <ng-container *ngSwitchCase="1">
+            <img [src]="message.messageLink.imageUrl" class="effect image" />
+        </ng-container>
+        <ng-container *ngSwitchCase="4">
+            <video [src]="safeLink" preload="none" #videoPlayer autoplay="true" controls="" class="video"  (click)="blockPropagation($event)"></video>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <iframe [src]="safeLink" allow="autoplay" width="800" height="480" class="video" (click)="blockPropagation($event)"></iframe>
+        </ng-container>
+    </ng-container>
+
     <span class="info-text">
       <div class="d-flex flex-row justify-content-center align-self-center">
         <div class="p-2" style="font-size:4em;">
@@ -19,7 +24,8 @@
         <div class="row bottom-text" style="width:500px;">
           <div class="col-9">
             <span class="name-text">{{message.name}}</span>&nbsp;
-            <span class="date-text">{{ message.getDate() | date}}</span></div>
+            <span class="date-text">{{ message.getDate() | date}}</span>
+          </div>
           <div class="col-3" style="font-size:2em;" likes [message]="message">
           </div>
         </div>
