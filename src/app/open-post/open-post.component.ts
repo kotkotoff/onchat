@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 
+
 @Component({
   selector: 'open-post',
   templateUrl: './open-post.component.html',

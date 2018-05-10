@@ -29,6 +29,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { LikesComponent } from './likes/likes.component';
 import {HttpClientModule} from '@angular/common/http';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { LoaderImageDirective } from './shared/loader-image.directive';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
     PostCardComponent,
     ModalDeleteComponent,
     FocusDirective,
-    LikesComponent
+    LikesComponent,
+    LoaderImageDirective
   ],
   imports: [
     BrowserModule,
