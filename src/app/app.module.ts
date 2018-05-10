@@ -28,6 +28,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { LikesComponent } from './likes/likes.component';
 import {HttpClientModule} from '@angular/common/http';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     ModalModule.forRoot(),
     TabsModule.forRoot(),
+    PopoverModule.forRoot(),
     RouterModule.forRoot([
       { path: '', component: MainComponent, canActivate: [AuthGuard]},
       { path: 'login', component: LoginComponent },

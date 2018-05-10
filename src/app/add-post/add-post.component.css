@@ -1,1 +1,10 @@
 @import '../../assets/postcard.css';
+
+:host >>> .popover {
+  background-color: hotpink;
+  color: #fff;
+}
+
+:host >>> .popover>.arrow:after {
+  border-bottom-color: hotpink;
+}

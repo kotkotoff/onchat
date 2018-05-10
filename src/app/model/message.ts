@@ -20,11 +20,6 @@ export class Message {
         this.likes = m.likes;
     }
 
-    static create(userId: string, name: string, messageLink: MessageLink): Message {
-        const date = new Date().getTime();
-        return new Message('', {userId, name, date, messageLink, commentCount: 0, likes: []} );
-    }
-
     getDate() {
         return new Date(this.date);
     }

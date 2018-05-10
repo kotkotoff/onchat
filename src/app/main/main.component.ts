@@ -61,16 +61,6 @@ export class MainComponent implements OnInit, OnDestroy {
     });
   }
 
-  post(messageLink: MessageLink) {
-    this.messageService.save(
-      Message.create(
-        this.userService.user.id,
-        this.userService.user.displayName,
-        messageLink
-      )
-    );
-  }
-
   track(index, item) {
     return item.id;
   }

@@ -1,0 +1,35 @@
+[debug] [2018-05-10T09:26:22.990Z] ----------------------------------------------------------------------
+[debug] [2018-05-10T09:26:22.992Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase deploy
+[debug] [2018-05-10T09:26:22.992Z] CLI Version:   3.18.4
+[debug] [2018-05-10T09:26:22.992Z] Platform:      win32
+[debug] [2018-05-10T09:26:22.992Z] Node Version:  v9.11.1
+[debug] [2018-05-10T09:26:23.005Z] Time:          Thu May 10 2018 12:26:22 GMT+0300 (FLE Daylight Time)
+[debug] [2018-05-10T09:26:23.005Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-05-10T09:26:23.050Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-05-10T09:26:23.051Z] > authorizing via signed-in user
+[debug] [2018-05-10T09:26:23.052Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-05-10T09:26:23.052Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/jD8uemnOP1fAVRiUjDz-2qGiyg_xbLQqUndcz8yPuBE',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu May 10 2018 12:26:23 GMT+0300 (FLE Daylight Time)
+[debug] [2018-05-10T09:26:23.358Z] <<< HTTP RESPONSE 200
+[debug] [2018-05-10T09:26:23.364Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/mytest-c20e3  
+  
+ Thu May 10 2018 12:26:23 GMT+0300 (FLE Daylight Time)
+[debug] [2018-05-10T09:26:23.792Z] Error: EPERM: operation not permitted, rename 'C:\Users\dspir\.config\configstore\firebase-tools.json.3419516606' -> 'C:\Users\dspir\.config\configstore\firebase-tools.json'
+    at Object.fs.renameSync (fs.js:781:18)
+    at Function.writeFileSync [as sync] (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\node_modules\write-file-atomic\index.js:124:8)
+    at Configstore.set (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\index.js:62:21)
+    at Configstore.set (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\configstore\index.js:93:11)
+    at Request._callback (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\lib\fetchMOTD.js:53:21)
+    at Request.self.callback (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:186:22)
+    at Request.emit (events.js:180:13)
+    at Request.emit (domain.js:422:20)
+    at Request.<anonymous> (C:\Users\dspir\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\request\request.js:1163:10)
+    at Request.emit (events.js:180:13)
+[error] 
+[error] Error: An unexpected error has occurred.

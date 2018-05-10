@@ -1,5 +1,6 @@
+import { MessageService } from './../services/message.service';
 import { MessageLink } from './../model/message-link';
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LinkParser } from './../model/link-parser';
 import { Post } from '../model/post';
@@ -10,6 +11,7 @@ import { Post } from '../model/post';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent {
+  @ViewChild("pop") popover;
   @Output('addPost') addPost = new EventEmitter<MessageLink>();
   isError: boolean;
   linkText: string = "";
@@ -17,7 +19,8 @@ export class AddPostComponent {
   visible: boolean = true;
   private _safeLink: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer, private linkParser: LinkParser) {  }
+  constructor(private sanitizer: DomSanitizer, private linkParser: LinkParser,
+    private messageService: MessageService) {  }
 
   onTextChanged() {
     if (this.linkText && this.linkText.length < 500) {
@@ -45,10 +48,15 @@ export class AddPostComponent {
   }
 
   mediaLoaded() {
-    const ml = new MessageLink(this.currentPost);
-    this.addPost.emit(ml);
-    this.clear();
-    this.hideAndShow();
+    const messageLink = new MessageLink(this.currentPost);
+    this.messageService.save(messageLink).subscribe(result => {
+      if (result) {
+        this.clear();
+        this.hideAndShow();
+      } else {
+        this.popover.show();
+      }
+    });
   }
 
   hideAndShow() {
