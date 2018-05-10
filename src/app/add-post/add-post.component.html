@@ -1,19 +1,19 @@
-<div class="card-header input-group">
-    <input type="text" #ltext [(ngModel)]="linkText" placeholder="link..."
+<div class="card border-secondary" *ngIf="visible">
+  <div class="card-header input-group">
+    <input type="text" #ltext [(ngModel)]="linkText" placeholder="link..." [class.invalid-input]="linkText && linkText.length > 0 && (isError || !safeLink)"
+      class="form-control card-text" (input)="onTextChanged()" (keyup.escape)="clear()" required>
+  </div>
 
-    [class.invalid-input]="linkText && linkText.length > 0 && (isError || !safeLink)"
-    class="form-control card-text" (input)="onTextChanged()" (keyup.escape)="clear()" required>
-</div>
-
-<div class="card-img-top">
+  <div class="card-img-top">
     <img *ngIf="currentPost.type != 4 && currentPost.imageUrl" [src]="currentPost.imageUrl" (load)="mediaLoaded()" (error)="mediaError()">
     <div *ngIf="currentPost.type == 4 && currentPost.linkUrl && safeLink" class="video">
-        <video preload="metadata" controls="" [src]="safeLink" (loadeddata)="mediaLoaded()" (error)="mediaError()"></video>
+      <video preload="metadata" controls="" [src]="safeLink" (loadeddata)="mediaLoaded()" (error)="mediaError()"></video>
     </div>
-</div>
+  </div>
 
-<div class="card-footer align-middle text-center">
+  <div class="card-footer align-middle text-center">
     <a class="card-link" href="#" *ngIf="linkText" (click)="clear()">
-        <i class="far fa-trash-alt"></i>
+      <i class="far fa-trash-alt"></i>
     </a>
+  </div>
 </div>

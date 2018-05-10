@@ -16,10 +16,11 @@
             <i class="fas fa-caret-left"></i>
           </a>
         </div>
-        <div class="row bottom-text" style="font-size:2em; width:500px;">
+        <div class="row bottom-text" style="width:500px;">
           <div class="col-9">
-            {{message.name}} at {{ message.getDate() | date}}</div>
-          <div class="col-3">
+            <span class="name-text">{{message.name}}</span>&nbsp;
+            <span class="date-text">{{ message.getDate() | date}}</span></div>
+          <div class="col-3" style="font-size:2em;">
             <likes [message]="message"></likes>
           </div>
         </div>

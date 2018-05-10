@@ -91,3 +91,12 @@
 .bottom-text {
     margin: auto;
 }
+
+.name-text {
+  font-size: large;
+}
+
+.date-text {
+  font-size: x-small;
+  color: darkgray;
+}

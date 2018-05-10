@@ -20,6 +20,7 @@ export class LinkParser {
     if (match && match[1]) {
       post.type = MediaType.Image;
       post.imageUrl = match[1];
+      post.linkUrl = null;
       if (this.checkYoutube(post) ||
       this.checkDirectVideo(post) ||
       this.checkCoub(post) ||

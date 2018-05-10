@@ -10,11 +10,11 @@ import { Post } from '../model/post';
   styleUrls: ['./add-post.component.css']
 })
 export class AddPostComponent {
-
   @Output('addPost') addPost = new EventEmitter<MessageLink>();
   isError: boolean;
   linkText: string = "";
   currentPost: Post = new Post();
+  visible: boolean = true;
   private _safeLink: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer, private linkParser: LinkParser) {  }
@@ -48,5 +48,13 @@ export class AddPostComponent {
     const ml = new MessageLink(this.currentPost);
     this.addPost.emit(ml);
     this.clear();
+    this.hideAndShow();
+  }
+
+  hideAndShow() {
+    this.visible = false;
+    setTimeout(() => {
+      this.visible = true;
+    }, 3000);
   }
 }
