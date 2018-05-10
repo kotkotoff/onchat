@@ -26,7 +26,7 @@
 
       <div class="row messages" #scrollMe [scrollTop]="scrollMe.scrollHeight">
         <ul class="list-group w-100" *ngIf="(comments | async) as coms">
-          <li class="w-100" *ngFor="let c of coms.list">
+          <li class="w-100" *ngFor="let c of coms.list; trackBy: trackComment">
             <strong>{{c.userName}}: </strong>{{ c.comment }}
           </li>
         </ul>

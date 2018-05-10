@@ -70,4 +70,8 @@ export class PostCardComponent {
     }
     return this.linkImage;
   }
+
+  trackComment(idx: number, comment: Comment) {
+    return comment.date;
+  }
 }
