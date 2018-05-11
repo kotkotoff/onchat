@@ -26,8 +26,7 @@ export class OpenPostComponent implements OnInit, OnDestroy {
   safeLink: SafeResourceUrl;
   opened: boolean;
 
-  constructor(public sanitizer: DomSanitizer, private messageService: MessageService) {
-  }
+  constructor(public sanitizer: DomSanitizer, private messageService: MessageService) {}
 
   ngOnInit(): void {
     this.subscription = this.messageSubject.subscribe(tuple => {
